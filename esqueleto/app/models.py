@@ -81,7 +81,7 @@ class DireitoViolado(models.Model):
 
 class Escola(models.Model):
     nome_escola = models.CharField(max_length=100)
-    endereco = models.ManyToManyField(Endereco)
+    endereco = models.ForeignKey(Endereco, on_delete=models.PROTECT)
     def __str__(self):
         return self.nome_escola
 class Denuncia(models.Model):
