@@ -12,11 +12,13 @@ admin.site.register(Endereco)
 admin.site.register(Contato)
 admin.site.register(Comunicante)
 admin.site.register(Anotacao)
-admin.site.register(DireitoViolado)
+admin.site.register(Direito)
 admin.site.register(Escola)
 admin.site.register(Denuncia)
 admin.site.register(Ocorrencia)
 admin.site.register(Vitima)
+admin.site.register(Documento)
+
 
 
 
