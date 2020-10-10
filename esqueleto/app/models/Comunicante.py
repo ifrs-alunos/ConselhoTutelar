@@ -8,7 +8,6 @@ class Comunicante(BaseModel):
     nome =  models.CharField(max_length=100)
     endereco = models.ManyToManyField(Endereco)
     telefone = models.CharField(max_length=11)
-    descricao_situacao = models.TextField()
     horario = models.DateField()
     meio_de_contato = models.ForeignKey(Contato, on_delete=models.PROTECT)
     documento = models.OneToOneField(Documento, on_delete=models.PROTECT)

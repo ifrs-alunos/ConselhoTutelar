@@ -5,7 +5,8 @@ from app.models.Direito import *
 class Denuncia(BaseModel):
     comunicante =  models.ForeignKey(Comunicante, on_delete=models.PROTECT)
     direito_violado =  models.ManyToManyField(Direito)
-    
+    descricao_situacao = models.TextField()
+
 
     class Meta:
         pass
