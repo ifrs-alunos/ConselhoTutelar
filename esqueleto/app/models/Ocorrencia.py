@@ -1,7 +1,7 @@
 from app.models.base import *
-from app.models.Denuncia import *
-from app.models.Anotacao import *
-from app.models.Conselheiro import *
+from app.models.denuncia import *
+from app.models.anotacao import *
+from app.models.conselheiro import *
 
 class Ocorrencia(BaseModel):
     conselheiro = models.ManyToManyField(Conselheiro)

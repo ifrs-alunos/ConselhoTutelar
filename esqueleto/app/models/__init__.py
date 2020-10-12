@@ -1,28 +1,26 @@
 from .base import *
+from django.contrib.auth.models import User 
 
-from .Cidade import *
-from .Bairro import *
-from .Endereco import *
+from .cidade import *
+from .bairro import *
+from .endereco import *
 
-from .Servidor import Servidor
-from .Secretaria import Secretaria
-from .Conselheiro import Conselheiro
+from .servidor import *
+from .secretaria import *
+from .conselheiro import *
 
-from .Direito import Direito
-from .Arquivo import Arquivo
-from .Anotacao import Anotacao
-from .Ocorrencia import Ocorrencia
-from .Denuncia import Denuncia
+from .direito import *
+from .arquivo import *
+from .anotacao import *
+from .ocorrencia import *
+from .denuncia import *
 
-from .Contato import Contato
-from .Documento import Documento
-from .Comunicante import Comunicante
+from .contato import *
+from .documento import *
+from .comunicante import *
 
-from .Escola import Escola
-from .Vitima import Vitima
-
-
-
+from .escola import *
+from .vitima import *
 
 
 

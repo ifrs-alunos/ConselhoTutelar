@@ -1,4 +1,4 @@
-from app.models.Servidor import *
+from app.models.servidor import *
 
 class Secretaria(Servidor):
     def cadastrar_comunicante(comunicante):

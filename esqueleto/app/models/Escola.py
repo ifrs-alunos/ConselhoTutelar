@@ -1,5 +1,5 @@
 from app.models.base import *
-from app.models.Endereco import *
+from app.models.endereco import *
 
 class Escola(BaseModel):
     nome_escola = models.CharField(max_length=100)

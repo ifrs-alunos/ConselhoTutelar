@@ -1,8 +1,8 @@
-from app.models.Servidor import *
+from app.models.servidor import *
 
 class Conselheiro(Servidor):
     def cadastrar_vitima(vitima):
-        pass
+        pass 
     def editar_vitima():
         pass
     def consultar_vitima(vitima):

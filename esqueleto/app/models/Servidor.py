@@ -1,9 +1,10 @@
 from app.models.base import *
+from django.contrib.auth.models import User 
+from app.models.base import BaseModel 
+ 
 
-class Servidor(BaseModel):
-    nome = models.CharField(max_length=100)
-    senha = models.CharField(max_length=20)
-    email = models.EmailField()
+class Servidor(BaseModel,User):
+    pass
     class Meta:
         abstract = True
         

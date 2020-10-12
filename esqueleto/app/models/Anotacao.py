@@ -1,5 +1,5 @@
 from app.models.base import *
-from app.models.Arquivo import *
+from app.models.arquivo import *
 
 class Anotacao(BaseModel):
     titulo = models.CharField(max_length=100)

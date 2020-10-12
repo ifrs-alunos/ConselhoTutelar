@@ -1,17 +1,18 @@
 from app.models.base import *
-from app.models.Cidade import *
-from app.models.Bairro import *
+from app.models.cidade import *
+from app.models.bairro import *
+from app.models.choices import LOGRADOURO_CHOICES
 
 class Endereco(BaseModel):
-    denominacao = models.CharField(max_length=100)
+    tipo_de_logradouro = models.CharField(choices=LOGRADOURO_CHOICES,default=' ')
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT,default='')
     complemento = models.CharField(max_length=100)
     numero = models.IntegerField()
-    rua = models.CharField(max_length=100)
+    logradouro = models.CharField(max_length=200)
     bairro = models.ForeignKey(Bairro, on_delete=models.PROTECT, default='')
+    eatual = models.BooleanField()
     def __str__(self):
-        return '{} {} {} {} '.format(self.rua, self.bairro, self.numero, self.complemento)
+        return '{} {} {} {} {} '.format(self.tipo_de_logradouro,self.logradouro, self.bairro, self.numero, self.complemento)
 
     class Meta:
         pass
-    

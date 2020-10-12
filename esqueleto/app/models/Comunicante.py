@@ -1,7 +1,7 @@
 from app.models.base import *
-from app.models.Documento import *
-from app.models.Contato import *
-from app.models.Endereco import *
+from app.models.documento import *
+from app.models.contato import *
+from app.models.endereco import *
 
 class Comunicante(BaseModel):
     data =  models.DateField()
@@ -14,5 +14,5 @@ class Comunicante(BaseModel):
     def __str__(self):
         return self.nome
     class Meta:
-        pass
+    vv    pass
     
