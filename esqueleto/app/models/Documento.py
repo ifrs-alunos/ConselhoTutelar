@@ -1,12 +1,12 @@
 from app.models.base import *
+from enum import Enum
 
+class Tipo(Enum):
+    RG = 'rg'
+    CPF = 'cpf'
 
 class Documento(BaseModel):
-    DOCUMENTO_CHOICES = (
-	('rg', 'RG'),
-	('cpf', 'CPF'),
-    )
-    escolha = models.CharField(choices=DOCUMENTO_CHOICES, max_length=3, default='')
+    escolha = models.CharField(choices=Tipo, max_length=3, default='')
     valor = models.CharField(max_length=11)
 
     def __str__(self):
