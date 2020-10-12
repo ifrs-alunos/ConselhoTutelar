@@ -4,7 +4,7 @@ from app.models.base import *
 class Documento(BaseModel):
     DOCUMENTO_CHOICES = (
 	('rg', 'RG'),
-	('cpf', 'CPF'),
+	('cp', 'CPF'),
     )
     escolha = models.CharField(choices=DOCUMENTO_CHOICES, max_length=3, default='')
     valor = models.CharField(max_length=11)
