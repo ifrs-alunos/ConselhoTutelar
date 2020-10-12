@@ -8,7 +8,7 @@ class Anotacao(BaseModel):
     arquivos = models.ForeignKey(Arquivo, on_delete=models.PROTECT)
     descricao = models.TextField()
     def __str__(self):
-        return self.titul
+        return self.titulo
     
     class Meta:
         pass
