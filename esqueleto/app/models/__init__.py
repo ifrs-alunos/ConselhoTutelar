@@ -15,9 +15,10 @@ from .anotacao import *
 from .ocorrencia import *
 from .denuncia import *
 
+from .comunicante import *
 from .contato import *
 from .documento import *
-from .comunicante import *
+
 
 from .escola import *
 from .vitima import *

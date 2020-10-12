@@ -14,15 +14,15 @@ SERIE_CHOICES = (
     )
 
 LOGRADOURO_CHOICES= (
-(1,'Rua'),
-(2,'Avenida'),
-(3,'Praça'),
-(4,'Quadra'),
-(5,'Alameda'),
-(6,'Beco'),
-(7,'Vila'),
-(8,'Estrada'),
-(9,'Passagem'),
-(10,'Viela'),
-(11,'Servidão'),
+('Rua','Rua'),
+('Avenida','Avenida'),
+('Praça','Praça'),
+('Quadra','Quadra'),
+('Alameda','Alameda'),
+('Beco','Beco'),
+('Vila','Vila'),
+('Estrada','Estrada'),
+('Passagem','Passagem'),
+('Viela','Viela'),
+('Servidão','Servidão'),
 )

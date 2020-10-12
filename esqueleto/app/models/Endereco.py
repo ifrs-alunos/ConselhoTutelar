@@ -4,7 +4,7 @@ from app.models.bairro import *
 from app.models.choices import LOGRADOURO_CHOICES
 
 class Endereco(BaseModel):
-    tipo_de_logradouro = models.CharField(choices=LOGRADOURO_CHOICES,default=' ')
+    tipo_de_logradouro = models.CharField(choices=LOGRADOURO_CHOICES,default=' ', max_length=20)
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT,default='')
     complemento = models.CharField(max_length=100)
     numero = models.IntegerField()

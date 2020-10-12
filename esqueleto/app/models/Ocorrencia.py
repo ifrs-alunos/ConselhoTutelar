@@ -4,10 +4,10 @@ from app.models.anotacao import *
 from app.models.conselheiro import *
 
 class Ocorrencia(BaseModel):
-    conselheiro = models.ManyToManyField(Conselheiro)
+    conselheiro = models.ForeignKey(Conselheiro, on_delete=models.PROTECT)
     denuncia = models.OneToOneField(Denuncia, on_delete=models.PROTECT)
-    anotacoes = models.ManyToManyField(Anotacao)
+    vitima = models.ForeignKey(Vitima, on_delete=models.PROTECT)
 
+    
     class Meta:
         pass
-    
