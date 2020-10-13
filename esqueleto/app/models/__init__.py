@@ -12,6 +12,10 @@ from .conselheiro import *
 from .direito import *
 from .arquivo import *
 from .anotacao import *
+
+from .escola import *
+
+from .vitima import *
 from .ocorrencia import *
 from .denuncia import *
 
@@ -20,8 +24,7 @@ from .contato import *
 from .documento import *
 
 
-from .escola import *
-from .vitima import *
+
 
 
 
