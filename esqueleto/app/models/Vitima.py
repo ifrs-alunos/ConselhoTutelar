@@ -14,4 +14,4 @@ class Vitima(BaseModel):
 
     class Meta:
         pass
-    
+    # todo: adicionar script para verificar a maioridade

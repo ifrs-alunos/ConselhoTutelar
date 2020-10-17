@@ -4,7 +4,7 @@ from app.models.base import BaseModel
  
 
 class Servidor(BaseModel,User):
-    pass
+    cpf = models.CharField(max_length=11)
     class Meta:
         abstract = True
         
