@@ -26,3 +26,11 @@ LOGRADOURO_CHOICES= (
 ('Viela','Viela'),
 ('Servidão','Servidão'),
 )
+
+TIPODOMEIO_CHOICES = (
+	('Telefone','Telefone'),
+	('Email','Email'),
+	('Rede Social','Rede Social'),
+	('Presencial','Presencial')
+
+)

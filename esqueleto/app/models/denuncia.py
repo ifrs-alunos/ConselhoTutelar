@@ -4,7 +4,7 @@ from app.models.endereco import *
 class Denuncia(BaseModel):
     comunicante =  models.ForeignKey(Comunicante, on_delete=models.PROTECT)
     horario = models.DateField()
-    enderco = models.OneToOneField(Endereco, on_delete=models.PROTECT)
+    endereco = models.OneToOneField(Endereco, on_delete=models.PROTECT)
 
 
     descricao_situacao = models.TextField()
