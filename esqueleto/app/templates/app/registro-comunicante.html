@@ -1,6 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
-{% block titulo_da_pagina %}Registro Secretaria {% endblock titulo_da_pagina %}
+{% block titulo_da_pagina %}Registro Comunicante {% endblock titulo_da_pagina %}
 {% block navbar %}
 
 {% block navitens %}
@@ -11,7 +11,7 @@
       </li>
       
     </ul>
-  </div>
+</div>
 {% endblock navitens %}
 
 {% endblock navbar %}
@@ -24,32 +24,28 @@
 
     <div class="form-group">
         <label for="nome">Nome:</label>
-        {{ form.nome }}
+        {{ comunicante.nome }}
     </div>
       <!-- <button type="addMeiodeContato" class="btn btn-primary">Adicionar Meio de Contato</button> -->
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="tipo">Tipo do Meio</label>
-            <select id="tipo" class="form-control" >
-                <option></option>
-            </select>
+            {{contato.tipo}}
         </div>
         <div class="form-group col-md-4">
-            <label for="forma">Meio</label>
-            <input type="text" class="form-control" id="forma" placeholder="nomedoemail@gmail.com">
+            <label for="forma">Forma</label>
+            {{contato.forma}}
         </div>
 
     </div>
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="escolha">Tipo de Documento</label>
-            <select id="escolha" class="form-control">
-            <option></option>
-            </select>
+            {{documento.escolha}}
         </div>
         <div class="form-group col-md-4">
             <label for="valor">Digitos</label>
-            <input type="number" class="form-control" id="valor" placeholder="11111111111">
+            {{documento.valor}}
         </div>
     </div>
     
@@ -58,14 +54,12 @@
 
         <div class="form-group col-md-2">
             <label for="tipodelogradouro">Tipo de Logradouro</label>
-            <select id="tipodelogradouro" class="form-control">
-                <option></option>
-            </select>
+            {{endereco.tipo_de_logradouro}}
         </div>
         
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-4">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" class="form-control" id="logradouro" placeholder="Coronel Borges">
+                {{ endereco.logradouro }}
 
         </div>
     </div>
@@ -73,12 +67,12 @@
     <div class="form-row">
         <div class="form-group col-md-1">
             <label for="numerocasa">Número</label>
-            <input type="number" class="form-control" id="numerocasa" placeholder="343">
+            {{ endereco.numero }}
         </div>
 
         <div class="form-group col-md-5">
             <label for="tipocomplemento">Complemento</label>
-            <input type="text" class="form-control" id="tipocomplemento" placeholder="Ao lado da Casa das Carnes">
+            {{ endereco.complemento }}
         </div>
     </div>
 
@@ -96,46 +90,40 @@
                 <option></option>
             </select>
         </div>
-
+    
     </div>
+    
     <h1>Denúncia</h1>
     <div class="form-row">
         <div class="form-group col-md-2">
-            <label for="horario">Horário</label>
-            <input type="time" class="form-control" id="horario">
+            <label for="horario">Data/Horário</label>
+            {{ denuncia.horario}}
         </div>
-        <div class="form-group col-md-2">
-            <label for="data">Data</label>
-            <input type="date" class="form-control" id="data">  
-        </div>
+        
     </div>
     <div class="form-group">
         <label for="nomedasvitimas">Nome(s) da(s) possível(eis) Vítima(s)</label>
-        <input type="text" class="form-control" id="nomedasvitimas">
+        {{ denuncia.nomevitimas}}
     </div>
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="direitoviolado">Direito Violado</label>
-                    <select id="direitoviolado" class="form-control">
-                        <option></option>
-                    </select>
+            {{direito.nome_direito}}
         </div>
     </div>
 
     <h2>Local da Violação do direito</h2>
-
+    
     <div class="form-row">
 
         <div class="form-group col-md-2">
             <label for="tipodelogradouro">Tipo de Logradouro</label>
-            <select id="tipodelogradouro" class="form-control">
-                <option></option>
-            </select>
+            {{endereco.tipo_de_logradouro}}
         </div>
         
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-4">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" class="form-control" id="logradouro" placeholder="Coronel Borges">
+                {{ endereco.logradouro }}
 
         </div>
     </div>
@@ -143,14 +131,15 @@
     <div class="form-row">
         <div class="form-group col-md-1">
             <label for="numerocasa">Número</label>
-            <input type="number" class="form-control" id="numerocasa" placeholder="343">
+            {{ endereco.numero }}
         </div>
 
         <div class="form-group col-md-5">
             <label for="tipocomplemento">Complemento</label>
-            <input type="text" class="form-control" id="tipocomplemento" placeholder="Ao lado da Casa das Carnes">
+            {{ endereco.complemento }}
         </div>
     </div>
+
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="tipocidade">Cidade</label>
@@ -165,16 +154,25 @@
                 <option></option>
             </select>
         </div>
+    
     </div>
+
+    
     <div class="form-group">
         <label for="descricao">Descrição da Situação</label>
-        <input type="textarea" class="form-control" id="descricao">
+        {{ denuncia.descricao_situacao}}
     </div>
     
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+    
+
 
 </form>
-	
+<br>
+    
+    
+    
+
 {% endblock content %}
 
 

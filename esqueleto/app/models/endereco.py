@@ -10,7 +10,6 @@ class Endereco(BaseModel):
     numero = models.IntegerField()
     logradouro = models.CharField(max_length=200)
     bairro = models.ForeignKey(Bairro, on_delete=models.PROTECT, default='')
-    eatual = models.BooleanField()
     # TODO: FAZER UMA VERIFICAÇÃO ANTES DE SALVAR SE UM BAIRRO PERTENCE A UMA CIDADE
     def __str__(self):
         return '{} {} {} {} {} '.format(self.tipo_de_logradouro,self.logradouro, self.bairro, self.numero, self.complemento)

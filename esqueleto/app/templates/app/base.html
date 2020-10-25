@@ -5,7 +5,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static '/css/style.css' %}" rel="stylesheet">
@@ -30,19 +30,20 @@
     </nav>
   {% endblock nav %}
   
-  {% block content %}
-  {% endblock content %}
+  <div class="container-fluid ">
+    {% block content %}
 
 
 
 
+      
+    {% endblock content %}
+  </div>
+  {% block boostrapjs %}
+      <script src="{% static '/js/bootstrap.bundle.min.js.map' %}"></script>
+      <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+  {% endblock boostrapjs %}
 
 
-
-
-
-
-
-<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
