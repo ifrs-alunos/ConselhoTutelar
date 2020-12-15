@@ -1,0 +1,16 @@
+#accordion > div  { 
+    border: 0;
+}
+.background-white{
+    background-color: white;
+}
+a.link {
+    text-decoration: none;
+    color: #212529;
+
+}
+
+.card-ocorrencia:hover{
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+

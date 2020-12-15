@@ -1,208 +1,141 @@
 {% extends "app/base.html" %}
 {% load static %}
+
 {% block titulo_da_pagina %}Registro Comunicante {% endblock titulo_da_pagina %}
 {% block navbar %}
 
-{% block navitens %}
-<div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item ">
-        <a class="nav-link" href="{% url 'registro_comunicante' %}">Registrar</a>
-      </li>
-      
-    </ul>
-</div>
-{% endblock navitens %}
+	{% block navitens %}
+		<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item ">
+						<a class="nav-link" href="{% url 'app:registro_comunicante' %}">Registrar</a>
+					</li>
+				</ul>
+		</div>
+	{% endblock navitens %}
 
 {% endblock navbar %}
 {% block content %}
 
+<div class="container">
+	<form id="form-comunicante" method="POST" class=" mb-4"action="{% url 'app:registro_comunicante' %}" novalidate>
+			{% csrf_token %}
 
-<form id="form-comunicante" method="POST" action="{% url 'registro_comunicante' %}">
-    {% csrf_token %}
-    <h1>Dados do Comunicante</h1>
+				<ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+						<li class="nav-item">
+								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><h3>Dados do Comunicante</h3></a>
+							</li>
+						<li class="nav-item">
+								<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><h3>Denúncia</h3></a>
+						</li>
+						
+				</ul>
+		
+				<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+							<h1>Dados do Comunicante</h1>
+								<div class="form-row">
+								{% for field in comunicante %}
+								<div class="form-group col">
+										{{field.label_tag}}
+										{{field}}
+										<div class="invalid-feedback">
+											{{field.errors}}
+										</div>
+								{% endfor %}
+								</div>
+						</div>
+								<!-- <button type="addMeiodeContato" class="btn btn-primary">Adicionar Meio de Contato</button> -->
+								<div class="form-row">
+								{% for field in contato %}
+										<div class="form-group col">
+												{{field.errors}}
+												{{field.label_tag}}
+												{{field}}
+										</div>
+								{% endfor %}
+								</div>
+									
+							<div class="form-row">
+									<div class="form-group col">
+											<label for="escolha">Tipo de Documento</label>
+											{{documento.escolha}}
+									</div>
+									<div class="form-group col">
+											<label for="valor">Digitos</label>
+											{{documento.valor}}
+									</div>
+							</div>
 
-    <div class="form-group">
-        <label for="nome">Nome:</label>
-        {{ comunicante.nome }}
-    </div>
-      <!-- <button type="addMeiodeContato" class="btn btn-primary">Adicionar Meio de Contato</button> -->
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="tipo">Tipo do Meio</label>
-            {{contato.tipo}}
-        </div>
-        <div class="form-group col-md-4">
-            <label for="forma">Forma</label>
-            {{contato.forma}}
-        </div>
+							<h2>Endereço</h2>
+										{% for field in endereco %}
+												<div class="form-group">
+														{{field.errors}}
+														{{field.label_tag}}
+														{{field}}
+												</div>
+										{% endfor %}
+										<a class="btn btn-primary btn-lg btnPrevious">
+												<i class="fas fa-arrow-left"></i>
+										</a>
 
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="escolha">Tipo de Documento</label>
-            {{documento.escolha}}
-        </div>
-        <div class="form-group col-md-4">
-            <label for="valor">Digitos</label>
-            {{documento.valor}}
-        </div>
-    </div>
-    
-    <h1>Endereço</h1>
-    <div class="form-row">
+										<a class="btn btn-primary btn-lg float-right btnNext">
+												<i class="fas fa-arrow-right"></i>
+										</a>
+						</div>
+						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<h1>Denúncia</h1>
+								{% for field in denuncia %}
+								<div class="form-group">
+										{{field.errors}}
+										{{field.label_tag}}
+										{{ field}}
+								</div>
+								{% endfor %}
+						<a class="btn btn-primary btn-lg btnPrevious">
+								<i class="fas fa-arrow-left"></i>
+						</a>
+						<button type="submit" class="btn btn-primary btn-lg float-right">Enviar</button>
+					</div>
+				</div>
+	</form>
+	
+</div>
+<script>
+	function te(valor) {
+		var bairros = document.getElementById("id_bairro");
+		var teste = {{teste}}
+		for (let t = 1; t <= Object.keys(teste).length; t++) {
+				if (t == valor) {
+						var fodase = teste[t]
+						for (let x = 0; x < fodase.length; x++) {
+						var element = bairros[fodase[x]];
+						element.setAttribute("escolhido",'sim')
+						
+						
+						}
+				}   
+}
+		for (let h = 0; h < bairros.length; h++) {
+			const element = bairros[h];
+			if (!(element.hasAttribute("escolhido"))) {
+			 element.setAttribute("hidden",true)
+		}
+			else {
+				element.removeAttribute("hidden")
+			}
+			element.removeAttribute("escolhido")
+		}
+	}
 
-        <div class="form-group col-md-2">
-            <label for="tipodelogradouro">Tipo de Logradouro</label>
-            {{endereco.tipo_de_logradouro}}
-        </div>
-        
-        <div class="form-group col-md-4">
-                <label for="logradouro">Logradouro</label>
-                {{ endereco.logradouro }}
+</script>
 
-        </div>
-    </div>
-    
-    <div class="form-row">
-        <div class="form-group col-md-1">
-            <label for="numerocasa">Número</label>
-            {{ endereco.numero }}
-        </div>
-
-        <div class="form-group col-md-5">
-            <label for="tipocomplemento">Complemento</label>
-            {{ endereco.complemento }}
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="tipocidade">Cidade</label>
-            <select id="tipocidade" class="form-control">
-                <option></option>
-            </select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label for="tipobairro">Bairro</label>
-            <select id="tipobairro" class="form-control">
-                <option></option>
-            </select>
-        </div>
-    
-    </div>
-    
-    <h1>Denúncia</h1>
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="horario">Data/Horário</label>
-            {{ denuncia.horario}}
-        </div>
-        
-    </div>
-    <div class="form-group">
-        <label for="nomedasvitimas">Nome(s) da(s) possível(eis) Vítima(s)</label>
-        {{ denuncia.nomevitimas}}
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="direitoviolado">Direito Violado</label>
-            {{direito.nome_direito}}
-        </div>
-    </div>
-
-    <h2>Local da Violação do direito</h2>
-    
-    <div class="form-row">
-
-        <div class="form-group col-md-2">
-            <label for="tipodelogradouro">Tipo de Logradouro</label>
-            {{endereco.tipo_de_logradouro}}
-        </div>
-        
-        <div class="form-group col-md-4">
-                <label for="logradouro">Logradouro</label>
-                {{ endereco.logradouro }}
-
-        </div>
-    </div>
-    
-    <div class="form-row">
-        <div class="form-group col-md-1">
-            <label for="numerocasa">Número</label>
-            {{ endereco.numero }}
-        </div>
-
-        <div class="form-group col-md-5">
-            <label for="tipocomplemento">Complemento</label>
-            {{ endereco.complemento }}
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="tipocidade">Cidade</label>
-            <select id="tipocidade" class="form-control">
-                <option></option>
-            </select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label for="tipobairro">Bairro</label>
-            <select id="tipobairro" class="form-control">
-                <option></option>
-            </select>
-        </div>
-    
-    </div>
-
-    
-    <div class="form-group">
-        <label for="descricao">Descrição da Situação</label>
-        {{ denuncia.descricao_situacao}}
-    </div>
-    
-    <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-    
-
-
-</form>
-<br>
-    
-    
-    
+<script>
+	var Value = document.getElementById("id_cidade");
+	var teste = Value.addEventListener('input',teste,false);
+	function teste() {
+		te(Value.value)
+	}
+</script>
 
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</html>
