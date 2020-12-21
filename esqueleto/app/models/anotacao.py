@@ -1,10 +1,10 @@
 from app.models.base import *
 from app.models.ocorrencia import *
+from django.utils import timezone
 
 class Anotacao(BaseModel):
     titulo = models.CharField(max_length=100)
-    data = models.DateField()
-    hora = models.TimeField()
+    data = models.DateTimeField(default=timezone.now)
     descricao = models.TextField()
     ocorrencia = models.ForeignKey(Ocorrencia, on_delete=models.PROTECT)
 

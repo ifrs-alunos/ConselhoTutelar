@@ -69,7 +69,9 @@ class DireitoForm(forms.ModelForm):
 class AnotacaoForm(forms.ModelForm):
     class Meta:
         model = models.Anotacao
-        fields = '__all__'
+        fields = ('titulo','descricao')
+        
+
 
     def __init__(self,*args, **kwargs):
         super(AnotacaoForm, self).__init__(*args, **kwargs)

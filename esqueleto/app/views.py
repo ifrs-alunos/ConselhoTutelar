@@ -153,15 +153,19 @@ def visualizar_vitima(request, vitima_id):
 
 
 def adicionar_anotacao(request, ocorrencia_id):
+    ocorrencia = get_object_or_404(Ocorrencia,pk=ocorrencia_id)
+
     if request.method == "POST":
         form = AnotacaoForm(request.POST)
+
         if form.is_valid():
-            form.save(commit=False)
-            form.ocorrencia = ocorrencia_id
+            form = form.save(commit=False)
+            form.ocorrencia = ocorrencia    
+            form.save() 
             messages.success(request,'Vitima cadastrada')
-            return redirect('app:secretaria')
     else:
         form = AnotacaoForm
+
 
     contexto = {
         'form':form,
