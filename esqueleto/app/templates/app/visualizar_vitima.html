@@ -15,25 +15,27 @@
     <div class="row">
         <div class="col-sm">
 			{% for ocorrencia in ocorrencias %}
-				<a  class="link"  href="{% url 'app:ocorrencia' vitima.id ocorrencia.id %}">
+				<a  class="link"  href="{% url 'app:ocorrencia' ocorrencia.id %}">
 					<div class="card card-ocorrencia">
 						<div class="card-header d-flex justify-content-center">
 							{{ocorrencia.denuncia.horario | date:"d/m/y"}}
 						</div>
 						
+						
 						<div class="card-body">
 							<div class="row">
-								<div class="card border-primary  ">
+								
+								<div class="card bg-primary text-white ms-1 mb-1"style="max-width: 10rem;">
 									<div class="card-header">Conselheiro</div>
-									<div class="card-body text-primary">
+									<div class="card-body ">
 									  <h5 class="card-title">{{ocorrencia.conselheiro}}</h5>
 									</div>
 								</div>					
 							
 									{% for direito in ocorrencia.denuncia.direito_set.all %}
-									<div class="card border-primary ">
+									<div class="card bg-success text-white ms-1 mb-1 "style="max-width: 10rem;">
 										<div class="card-header">Direito</div>
-										<div class="card-body text-primary">
+										<div class="card-body">
 										  <h5 class="card-title">{{direito}}</h5>
 										</div>
 									</div>
@@ -51,25 +53,22 @@
         <div class="col-sm">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href=""><i class="far fa-edit float-right fa-2x"></i></a>
+                    <a href="{% url 'app:vitima_update' vitima.id  %}"><i class="far fa-edit float-end fa-2x"></i></a>
                     <i class="far fa-user fa-3x"></i> <h2>{{vitima.nome}}</h2>
                 <li class="list-group-item">Nome do responsável: {{vitima.nome_responsavel}}</li>
                 <li class="list-group-item">Data de nascimento: {{vitima.data_nascimento}}</li>
-                <li class="list-group-item"><h3>Endereços</h3>
-                    <div id="accordion">
-                        {% for endereco in vitima.enderecos.all reversed %}
-                        <div class="card">
-                          <div class="card-header background-white" id="heading{{endereco.id}}">
-                            <h5 class="mb-0">
-                              <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{endereco.id}}" aria-expanded="true" aria-controls="collapse{{endereco.id}}">
-                                <i class="fas fa-angle-down"></i> Endereço {% if forloop.first %} Atual {% else %}{{endereco.id}}{% endif %}
-                              </button>
-                            </h5>
-                          </div>
-                      
-                          <div id="collapse{{endereco.id}}" class="collapse" aria-labelledby="heading{{endereco.id}}" data-parent="#accordion">
-                            <div class="card-body">
-                                <p><b>Tipo de logradouro:</b></p>
+				<li class="list-group-item"><h3>Endereços</h3>
+					<div class="accordion accordion-flush" id="accordion">
+						{% for endereco in vitima.enderecos.all reversed %}
+						<div class="accordion-item">
+						  <h2 class="accordion-header background-white" id="heading{{endereco.id}}">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{endereco.id}}" aria-expanded="true" aria-controls="collapse{{endereco.id}}">
+							 {% if forloop.first %} Atual {% else %}{{endereco.id}}{% endif %}
+							</button>
+						  </h2>
+						  <div id="collapse{{endereco.id}}" class="accordion-collapse collapse  show " aria-labelledby="heading{{endereco.id}}" data-bs-parent="#accordionExample">
+							<div class="accordion-body">
+								<p><b>Tipo de logradouro:</b></p>
                                 <p>{{endereco.tipo_de_logradouro}}</p>
                                 <p><b>Logradouro:</b></p>
                                 <p>{{endereco.logradouro}}</p>
@@ -106,35 +105,15 @@
 										<p>{{endereco.bairro}}</p>
 									</div>
                                 </div>
-                            </div>
-                          </div>
-                        </div>
-                        {% endfor %}
+							</div>
+						  </div>
+						</div>
+						{% endfor%}
+					  </div>
                 </li>
                 <li class="list-group-item">Vestibulum at eros</li>
 			</ul>
-			<ul class="list-group mt-3">
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col-sm-10">
-							<p>Conselheiro</p>
-						</div>
-						<div class="col">
-							<div class="p-3  bg-info rounded "></div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="row">
-						<div class="col-sm-10">
-							<p>Direito</p>
-						</div>
-						<div class="col">
-							<div class="p-3 bg-primary rounded"></div>
-						</div>
-					</div>
-				</li>
-			</ul>	
+			
 		</div>
       </div>
 </div>

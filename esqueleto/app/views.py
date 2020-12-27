@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Bairro, Cidade, Comunicante, Denuncia, Direito, Ocorrencia, Contato, Vitima
+from .models import Bairro, Cidade, Comunicante, Denuncia, Direito, Ocorrencia, Contato, Vitima,Anotacao
 from django.contrib import messages
 import datetime
 from .forms import ComunicanteForm, ContatoForm, EnderecoForm, DocumentoForm,DenunciaForm, DireitoForm, AnotacaoForm, VitimaForm
@@ -112,7 +112,8 @@ def lista_vitima(request):
     else:
 
         vitimas = Vitima.objects.all()
-    maioridades = Vitima.objects.filter(data_nascimento__year__gte=datetime.datetime.now().year-18)
+        print(datetime.datetime.now().year-18)
+    maioridades = Vitima.objects.filter(data_nascimento__year=datetime.datetime.now().year-18)
     
     contexto = {
         'titulo_pagina':'lista_vitima',
@@ -142,7 +143,7 @@ def cadastrar_vitima(request):
 
 def visualizar_vitima(request, vitima_id):
     vitima = get_object_or_404(Vitima,pk=vitima_id)
-    ocorrencias = Ocorrencia.objects.filter(vitima=vitima.id)
+    ocorrencias = Ocorrencia.objects.filter(vitimas=vitima.id)
     
     contexto = {
         'titulo_pagina':'vitima',
@@ -154,7 +155,6 @@ def visualizar_vitima(request, vitima_id):
 
 def adicionar_anotacao(request, ocorrencia_id):
     ocorrencia = get_object_or_404(Ocorrencia,pk=ocorrencia_id)
-
     if request.method == "POST":
         form = AnotacaoForm(request.POST)
 
@@ -163,6 +163,7 @@ def adicionar_anotacao(request, ocorrencia_id):
             form.ocorrencia = ocorrencia    
             form.save() 
             messages.success(request,'Vitima cadastrada')
+            return redirect('app:ocorrencia',ocorrencia_id= ocorrencia_id)
     else:
         form = AnotacaoForm
 
@@ -174,28 +175,32 @@ def adicionar_anotacao(request, ocorrencia_id):
     return render(request,'app/adicionar_anotacao.html',contexto)
     
 
-# def vitima_update(request, vitima_id):
-#     vitima = get_object_or_404(Vitima,pk=vitima_id)
-#     if request.method =="POST":
-#             form = VitimaForm(request.POST, instance=vitima)
-#             if form.is_valid():
-#                 form.save()
-#                 messages.success(request,'Vitima Alterada com sucesso')
-#                 return redirect('app:lista_vitima')
-#     else:
-#         form = VitimaForm(request.POST, instance=vitima)
-#         contexto = {
-#             "form":form
-#         }
-#         return render(request, "app/vitima_update.html",contexto)
+def vitima_update(request, vitima_id):
+    vitima = get_object_or_404(Vitima,pk=vitima_id)
+    if request.method =="POST":
+            form = VitimaForm(request.POST, instance=vitima)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Vitima Alterada com sucesso')
+                return redirect('app:lista_vitima')
+    else:
+        form = VitimaForm(instance=vitima)
+        contexto = {
+            "form":form,
+            'vitima_id':vitima_id
+        }
+        return render(request, "app/vitima_update.html",contexto)
                 
 
 
-def ocorrencia(request,vitima_id,ocorrencia_id):
+def ocorrencia(request,ocorrencia_id):
     ocorrencia = get_object_or_404(Ocorrencia,pk=ocorrencia_id)
-    
+    anotacoes = Anotacao.objects.filter(ocorrencia=ocorrencia.id)
+    tutelados = ocorrencia.vitimas.all()
     contexto = {
         'titulo_pagina':'ocorrencia',
         'ocorrencia':ocorrencia,
+        'anotacoes':anotacoes,
+        'tutelados':tutelados
     }
     return render(request,'app/ocorrencia.html',contexto)

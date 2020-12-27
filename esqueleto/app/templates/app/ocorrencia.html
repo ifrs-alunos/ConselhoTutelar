@@ -12,26 +12,27 @@
 {% block content %}
 
 <div class="container">
-    <a  href="{% url  'app:adicionar_anotacao' ocorrencia.id  %}" class="btn btn-secondary"><i class="fas fa-plus"></i> Adicionar anotação</a>
+    <a  href="{% url  'app:adicionar_anotacao'  ocorrencia.id  %}" class="btn btn-secondary"><i class="fas fa-plus"></i> Adicionar anotação</a>
     <div class="row mt-3">
         <div class="col-sm-8">
-            <div class="card">
-                <div class="card-horizontal">
-                    <div class="card-footer">
-                        <small class="text-muted">21/10</small>
-                        <br>
-                        <small class="text-muted">25:00</small>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            {% for anotacao in anotacoes  reversed %}
+                <div class="card mb-2">
+                    <div class="card-horizontal">
+                        <div class="card-footer">
+                            <small class="text-muted">{{anotacao.data | date:"d/m"}}</small>
+                            <br>
+                            <small class="text-muted">{{anotacao.data | date:"H:i"}}</small>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ anotacao.titulo}}</h4>
+                            <p class="card-text">{{ anotacao.descricao}}.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
+            {% endfor%}
         </div>
         <div class="col-sm">
-            <ul class="list-group">
+            <ul class="list-group position-fixed">
                 <li class="list-group-item"><h4 class="mb-1">Ocorrencia Nº {{ocorrencia.id}}</h4></li>
                 <li class="list-group-item">
                     <p>Data: {{ocorrencia.denuncia.horario | date:"d/m/y"}}</p>
@@ -44,7 +45,10 @@
                     <a href="{% url 'app:visualizar_denuncia' ocorrencia.denuncia.id%}"><p>Denuncia {{ocorrencia.denuncia.id}}</p></a>
                 </li>
                 <li class="list-group-item">
-                    <h4>Tutelados</h4>
+                    <h4>Vitimas</h4>
+                    {% for tutelado in tutelados %}
+                    <a href="{% url 'app:visualizar_vitima' tutelado.id%}"> <i class="fas fa-user-circle fa-2x" data-bs-toggle="tooltip" data-bs-placement="top" title="{{tutelado.nome}}"></i></a>
+                    {% endfor %}
                 </li>
               </ul>
         </div>
@@ -52,8 +56,8 @@
 <div class=" mt-3">
     <div class="row">
         <div class="col-sm-8">
-            <div class="card">
-                <h5 class="card-header">Documentos <i class="fas fa-plus-circle float-right"></i></h5>
+            <div class="card ">
+                <h5 class="card-header">Documentos <i class="fas fa-cloud-upload-alt float-end"></i></h5>
 
                 <div class="card-body">
                   <p class="card-text"></p>

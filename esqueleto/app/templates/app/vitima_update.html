@@ -6,17 +6,17 @@
 {% endblock navbar %}
 {% block content %}
     <div class="container">
-        <h3>Dados da Vitima</h3>
-        <form id="form-anotacao" method="POST" action="{% url 'app:vitima_update' %}">
+        <h3>Dados da Vítima</h3>
+        <form id="form-anotacao" method="POST" action="{% url 'app:vitima_update' vitima_id %}">
             {{ form.non_field_errors }}
             {% csrf_token %}
-            {% for field in vitima %}
+            {% for field in form %}
                 <div class="form-group">
                     {{field.label_tag}}
                     {{field}}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary float-right">Adicionar</button>
+            <button type="submit" class="btn btn-primary float-end">Adicionar</button>
         </form>
     </div>
 {% endblock content %}

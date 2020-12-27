@@ -17,3 +17,13 @@
 main > .container {
     padding-top: 80px;
   }
+
+.maioridade {
+    background-color: #4476E3  !important;
+}
+
+.btn {
+     background-color: #5A6D96 !important;
+     border: 0px !important;
+     color: white !important;
+ }

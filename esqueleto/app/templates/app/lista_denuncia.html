@@ -7,12 +7,13 @@
 {% block content %}
 
 <div class="container">
-    <form class="form-group" method="get" action='{% url 'app:lista_denuncia'  %}'>
+  
+    <form class="form-group mb-3" method="get" action='{% url 'app:lista_denuncia'  %}'>
       <div class="row">
-        <div class="col">
+        <div class="col-8">
           <input class="form-control mr-sm-2" type="search" name ="search" placeholder="Pesquisar" aria-label="Search">
         </div>
-        <div class="col">
+        <div class="col-2">
           <select class="custom-select form-control mr-sm-2" type="search" name ="filtro" placeholder="Pesquisar" aria-label="Search" >
             <option selected>Filtro</option>
             <option value="1">Data</option>
@@ -20,23 +21,23 @@
             <option value="3">Direito</option>
           </select>
         </div>
-        <div class="col">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        <div class="col-2">
+          <button class="btn  my-2 my-sm-0" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar"><i class="fas fa-search"></i></button>
 
         </div>
       </div>
     </form>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="denuncia-tab" data-toggle="tab" href="#denuncias" role="tab" aria-controls="home" aria-selected="false">Denuncias</a>
+          <a class="nav-link active" id="denuncia-tab" data-bs-toggle="tab" href="#denuncias" role="tab" aria-controls="home" aria-selected="false">Denuncias</a>
         </li>
         <li class="nav-item" role="presentation">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#denunciageral" role="tab" aria-controls="profile" aria-selected="true">Denuncias Gerais</a>
+          <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#denunciageral" role="tab" aria-controls="profile" aria-selected="true">Denuncias Gerais</a>
         </li>
         
     </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="denuncias" role="tabpanel" aria-labelledby="home-tab">...</div>
+        <div class="tab-pane fade show active" id="denuncias" role="tabpanel" aria-labelledby="home-tab">Sem denúncias para mostrar</div>
         <div class="tab-pane fade " id="denunciageral" role="tabpanel" aria-labelledby="profile-tab">
             <table class="table">
                 <thead >
@@ -56,7 +57,7 @@
                         <td>{{denuncia.horario}}</td>
                         <td>
                         {% for direito in denuncia.direito_set.all %}
-                          <span class="badge badge-pill badge-secondary">{{direito}}</span>
+                          <span class="badge bg-secondary">{{direito}}</span>
                         {% endfor %}
                         </td>
                         <td>

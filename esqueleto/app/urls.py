@@ -1,6 +1,6 @@
 from django.urls import path,include
 
-from .views import registro_comunicante, secretaria, lista_denuncia, visualizar_denuncia, lista_vitima, adicionar_anotacao, visualizar_vitima,cadastrar_vitima, ocorrencia
+from .views import registro_comunicante, secretaria, lista_denuncia, visualizar_denuncia, lista_vitima, adicionar_anotacao, visualizar_vitima,cadastrar_vitima, ocorrencia,vitima_update
 
 app_name = 'app'
 
@@ -14,6 +14,6 @@ urlpatterns = [
     path('listar/vitima',lista_vitima, name='lista_vitima'),
     path('vitima/<int:vitima_id>',visualizar_vitima, name='visualizar_vitima'),
     path('adicionar/anotacao/<int:ocorrencia_id>',adicionar_anotacao, name='adicionar_anotacao'),
-    # path('vitima/update/<int:vitima_id>',vitima_update, name="vitima_update"),
-    path('vitima/<int:vitima_id>/ocorrencia/<int:ocorrencia_id>',ocorrencia,name="ocorrencia"),
+    path('vitima/update/<int:vitima_id>',vitima_update, name="vitima_update"),
+    path('ocorrencia/<int:ocorrencia_id>',ocorrencia,name="ocorrencia"),
 ]
