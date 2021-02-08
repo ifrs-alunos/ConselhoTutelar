@@ -7,10 +7,16 @@
 {% block content %}
     <div class="container">
         <h3>Dados da Anotação</h3>
-        <form id="form-anotacao" method="POST" action="{% url 'app:adicionar_anotacao' ocorrencia_id %}">
+        <form id="form-anotacao" method="POST" enctype="multipart/form-data" action="{% url 'app:adicionar_anotacao' ocorrencia_id %}">
             {{ form.non_field_errors }}
             {% csrf_token %}
             {% for field in form %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
+            {% for field in arquivo %}
                 <div class="form-group">
                     {{field.label_tag}}
                     {{field}}

@@ -18,43 +18,75 @@
  <main class="flex-shrink-0 mb-3">
   {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark mb-auto  fixed-top">
-
-		<a class="navbar-brand" href="{% url 'app:secretaria' %}"><svg role="img" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		
+		<a class="navbar-brand" href="{% if user.is_authenticated %} {% url 'app:secretaria' %} {% else %} {% url 'accounts:login_user'%} {%endif%} "><svg role="img" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 		<path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
 		<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
 		</svg><span id="nome-titulo">Início</span></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 		</button>
-	  {% block navitens %}
-	  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav ">
-		  <li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-			  Denúncia
-			</a>
-			<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-			  <li><a class="dropdown-item" href="{% url 'app:lista_denuncia' %}">Todas</a></li>
-			  <li><a class="dropdown-item" href="{% url 'app:registro_comunicante' %}">Registrar</a></li>
-			</ul>
-		  </li>
-		  <li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-			  Vítima
-			</a>
-			<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-			  <li><a class="dropdown-item" href="{% url 'app:lista_vitima' %}">Todas</a></li>
-			  <li><a class="dropdown-item" href="{% url 'app:cadastrar_vitima' %}">Registrar</a></li>
-			</ul>
-		  </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="">Mapa</a>
-          </li>
-        </ul>
-      </div>
-        
-      {% endblock navitens %}
+		{% if user.is_authenticated %}
+			{% block navitens %}
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+				<ul class="navbar-nav ">
+				{% if perms.app.view_denuncia %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Denúncia
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+					{% if perms.app.view_denuncia %}
+						<li><a class="dropdown-item" href="{% url 'app:lista_denuncia' %}">Todas</a></li>
+					{% endif %}
+					{% if perms.app.add_comunicante %}
+					<li><a class="dropdown-item" href="{% url 'app:registro_comunicante' %}">Registrar</a></li>
+					{% endif %}
+					</ul>
+				</li>
+				{% endif %}
+				{% if perms.app.view_ocorrencia %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Ocorrência
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+						<li><a class="dropdown-item" href="{% url 'app:lista_ocorrencia' %}">Todas</a></li>
+
+					</ul>
+					
+				</li>
+				{% endif %}
+				{% if perms.app.view_vitima %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Vítima
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+						<li><a class="dropdown-item" href="{% url 'app:lista_vitima' %}">Todas</a></li>
+						<li><a class="dropdown-item" href="{% url 'app:cadastrar_vitima' %}">Registrar</a></li>
+						</ul>
+					</li>
+				{% endif %}
+				<li class="nav-item ">
+					<a class="nav-link disabled" href="">Mapa</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Minha conta
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+					<li><a class="dropdown-item" href="{% url 'accounts:update' %}">Visualizar</a></li>
+					<li><a class="dropdown-item" href="{% url 'accounts:logout_view' %}">Logout</a></li>
+					</ul>
+				</li>
+				</ul>
+			</div>
+				
+			{% endblock navitens %}
+		{% endif %}
 	</nav>
+	
 	
   {% endblock nav %}
   {% if messages %}
@@ -65,7 +97,9 @@
   </div>
   {% endfor %}
   {% endif %}
+  
 	{% block content %}
+	
 
 	{% endblock content %}
 </main>
@@ -76,17 +110,13 @@
 			<div class="col">
 				<p><a>Guilherme Alves da Silva</a>, <a>Gustavo da Silva Corona</a>, <a>Gustavo Oliveira Longo</a> e <a>Wendel Faria de Oliveira</a>.</p>
 			</div>
-			
-				
 			<div class="col">
 				<img  src="{%static 'images/conselho_tutelar.png'%}" class="img-fluid" width="50%"></img>
 			</div>
 
 			<div class="col ">
-				<img src="{%static 'images/Vertical-01.png'%}" class="img-fluid" width="50%"></img>
+				<img src="{%static 'images/tetes.png'%}" class="img-fluid" width="50%"></img>
 			</div>
-				
-			
 		  </div>
         </div>
       </footer>

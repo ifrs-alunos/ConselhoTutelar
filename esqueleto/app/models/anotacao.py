@@ -13,5 +13,3 @@ class Anotacao(BaseModel):
     
     class Meta:
         pass
-        
-    

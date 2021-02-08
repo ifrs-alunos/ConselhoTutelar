@@ -9,7 +9,7 @@
 
 <div class="container mb-auto">
 	
-	<form id="form-comunicante" method="POST" class=" mb-4"action="{% url 'app:registro_comunicante' %}" novalidate>
+	<form id="form-comunicante " method="POST" class=" mb-4 "action="{% url 'app:registro_comunicante' %}" novalidate>
 			{% csrf_token %}
 
 				<ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
@@ -46,8 +46,9 @@
 										</div>
 								{% endfor %}
 								</div>
-									
+								{{ documento.non_field_errors }}
 							<div class="form-row">
+								
 									<div class="form-group col">
 											<label for="escolha">Tipo de Documento</label>
 											{{documento.escolha}}
@@ -59,8 +60,10 @@
 							</div>
 
 							<h2>Endereço</h2>
+									{{ endereco.non_field_errors }}
 										{% for field in endereco %}
 												<div class="form-group">
+													
 														{{field.errors}}
 														{{field.label_tag}}
 														{{field}}

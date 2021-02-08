@@ -20,20 +20,18 @@
 						<div class="card-header d-flex justify-content-center">
 							{{ocorrencia.denuncia.horario | date:"d/m/y"}}
 						</div>
-						
-						
 						<div class="card-body">
 							<div class="row">
 								
 								<div class="card bg-primary text-white ms-1 mb-1"style="max-width: 10rem;">
 									<div class="card-header">Conselheiro</div>
 									<div class="card-body ">
-									  <h5 class="card-title">{{ocorrencia.conselheiro}}</h5>
+									  <h5 class="card-title">{{ocorrencia.denuncia.conselheiro}}</h5>
 									</div>
 								</div>					
 							
 									{% for direito in ocorrencia.denuncia.direito_set.all %}
-									<div class="card bg-success text-white ms-1 mb-1 "style="max-width: 10rem;">
+									<div class="card bg-success text-white ms-1 mb-1 "style="max-width: 9rem;">
 										<div class="card-header">Direito</div>
 										<div class="card-body">
 										  <h5 class="card-title">{{direito}}</h5>
@@ -66,7 +64,7 @@
 							 {% if forloop.first %} Atual {% else %}{{endereco.id}}{% endif %}
 							</button>
 						  </h2>
-						  <div id="collapse{{endereco.id}}" class="accordion-collapse collapse  show " aria-labelledby="heading{{endereco.id}}" data-bs-parent="#accordionExample">
+						  <div id="collapse{{endereco.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{endereco.id}}" data-bs-parent="#accordionExample">
 							<div class="accordion-body">
 								<p><b>Tipo de logradouro:</b></p>
                                 <p>{{endereco.tipo_de_logradouro}}</p>
@@ -111,7 +109,7 @@
 						{% endfor%}
 					  </div>
                 </li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item"></li>
 			</ul>
 			
 		</div>

@@ -7,11 +7,11 @@ from .cidade import *
 from .endereco import *
 
 from .servidor import *
-from .secretaria import *
-from .conselheiro import *
+
 
 from .direito import *
 from .arquivo import *
+
 from .anotacao import *
 
 from .escola import *

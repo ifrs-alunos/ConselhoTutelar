@@ -16,6 +16,13 @@
                     {{field}}
                 </div>
             {% endfor %}
+            <h4> Endereço</h4>
+            {% for field in endereco %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
             <button type="submit" class="btn btn-primary float-end">Adicionar</button>
         </form>
     </div>

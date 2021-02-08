@@ -7,10 +7,17 @@
 {% block content %}
     <div class="container">
         <h3>Dados da Vitima</h3>
-        <form id="form-anotacao" method="POST" action="{% url 'app:cadastrar_vitima' %}">
+        <form id="form-anotacao" method="POST" action="{% url 'app:cadastrar_vitima' %}" >
             {{ form.non_field_errors }}
             {% csrf_token %}
             {% for field in vitima %}
+                <div class="form-group">
+                    {{field.label_tag}}
+                    {{field}}
+                </div>
+            {% endfor %}
+            <h4> Endereço</h4>
+            {% for field in endereco %}
                 <div class="form-group">
                     {{field.label_tag}}
                     {{field}}

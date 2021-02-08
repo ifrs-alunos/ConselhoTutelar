@@ -19,7 +19,8 @@ main > .container {
   }
 
 .maioridade {
-    background-color: #4476E3  !important;
+    background-color:#5A6D96  !important;
+    color: white;
 }
 
 .btn {
@@ -27,3 +28,14 @@ main > .container {
      border: 0px !important;
      color: white !important;
  }
+
+.red { 
+    background-color: #dc3545!important;
+    border: 0px !important;
+    color: white !important;
+
+}
+
+main > .alert {
+    padding-top: 80px;
+  }

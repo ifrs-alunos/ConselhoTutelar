@@ -2,6 +2,7 @@ from app.models.base import *
 from app.models.cidade import *
 from app.models.bairro import *
 from app.models.choices import LOGRADOURO_CHOICES
+from django.core.exceptions import ValidationError
 
 class Endereco(BaseModel):
     tipo_de_logradouro = models.CharField(choices=LOGRADOURO_CHOICES,max_length=20)
@@ -11,7 +12,11 @@ class Endereco(BaseModel):
     cidade = models.ForeignKey(Cidade, on_delete=models.PROTECT)
     bairro = models.ForeignKey(Bairro, on_delete=models.PROTECT)
     
-    # TODO: FAZER UMA VERIFICAÇÃO ANTES DE SALVAR SE UM BAIRRO PERTENCE A UMA CIDADE
+    def clean(self):
+        # TODO: implementar com classe validator
+        if self.bairro not in self.cidade.bairro_set.all():
+            raise ValidationError('Bairro não pertence a essa cidade')
+        
     def __str__(self):
         return '{} {} {} {} {} '.format(self.tipo_de_logradouro,self.logradouro, self.bairro, self.numero, self.complemento)
 

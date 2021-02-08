@@ -24,11 +24,19 @@
             <br>
             <br>
             {% for contato in contatos %}
-              <h5><b>Meio para contato {{contato.id}}:</b></h5>
-              <p><b>Tipo de contato:</b></p>
-              <p>{{contato.tipo}}</p>
-              <p><b>Forma de contato:</b></p>
-              <p>{{contato.forma}}</p>
+              <h5><b>Meios para contato:</b></h5>
+              <div class="row">
+                <div class="col">
+                  <p><b>Tipo:</b></p>
+                  <p>{{contato.tipo}}</p>
+                </div>
+                <div class="col">
+                  <p><b>Digitos:</b></p>
+                  <p>{{contato.forma}}</p>
+                </div>
+              </div>
+              
+  
             {% endfor %}
             <br>
             <h3>Endereço</h3>
@@ -89,8 +97,38 @@
           {% endfor %}
           <p><b>Descrição:</b></p>
           <p>{{denuncia.descricao_situacao}}</p>
+          <div class="form" >
+            <form action="" class="row mb-5" method="post">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+
+                {%for field in form %}
+                {{field.errors}}
+                {{field.label_tag}}
+                <div class="input-group">
+                  {{field}}
+                  <button type="submit" class="input-group-text btn btn-primary"><i class="fas fa-arrow-right"></i> </button>
+                </div>
+                
+                {% endfor %}
+              <div class="invalid-feedback">
+                {{field.errors}}
+              </div>
+              <datalist id="datalistVitimas">
+                {% for vitima in vitimas%}
+                  <option value="{{vitima}}"></option>
+                {% endfor%}
+              </datalist>
+            </form>
+          </div>
+          <h4>Vitimas ja ligadas a essa denuncia:</h4>
+          {% for ligada in vitimas_ja_ligadas%}
+            <h5><span class="badge bg-secondary">{{ligada}}</span></h5>
+          {% endfor %}
+          
+
         </div>
-        
+    
     </div>
 
 
