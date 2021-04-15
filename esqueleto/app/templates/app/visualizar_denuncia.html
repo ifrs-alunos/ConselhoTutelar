@@ -14,86 +14,20 @@
     <br>
     <div class="row">
         <div class="col-6">
-            <h3>Comunicante</h3>
-            <br>
-            <i class="fas fa-user fa-4x" >
-            </i>
-            <span id="comunicante_nome">{{denuncia.comunicante.nome}}</span>
-            <br>
-            N° - {{denuncia.comunicante.id}}
-            <br>
-            <br>
-            {% for contato in contatos %}
-              <h5><b>Meios para contato:</b></h5>
-              <div class="row">
-                <div class="col">
-                  <p><b>Tipo:</b></p>
-                  <p>{{contato.tipo}}</p>
-                </div>
-                <div class="col">
-                  <p><b>Digitos:</b></p>
-                  <p>{{contato.forma}}</p>
-                </div>
-              </div>
-              
-  
-            {% endfor %}
-            <br>
-            <h3>Endereço</h3>
-            {% if denuncia.comunicante.endereco is None %}
-              <p>Comunicante não registrou o endereço</p>
-            {% else %}
-            <br>
-            <p><b>Tipo de logradouro:</b></p>
-            <p>{{denuncia.comunicante.endereco.tipo_de_logradouro}}</p>
-            <p><b>Logradouro:</b></p>
-            <p>{{denuncia.comunicante.endereco.logradouro}}</p>
-            <div class="row">
-              <div class="col">
-                <p><b>Número:</b></p>
-              </div>
-              <div class="col">
-                <p><b>Complemento:</b></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>{{denuncia.comunicante.endereco.numero}}</p>
-              </div>
-              <div class="col">
-                <p>{{denuncia.comunicante.endereco.complemento}}</p>
-              </div>
-            </div>
-            
-            <div class="row">
-              <div class="col">
-                <p><b>Cidade:</b></p>
-              </div>
-              <div class="col">
-                <p><b>Bairro:</b></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p>{{denuncia.comunicante.endereco.cidade}}</p>
-              </div>
-              <div class="col">
-                <p>{{denuncia.comunicante.endereco.bairro}}</p>
-              </div>
-            </div>
-            {% endif %}
-        </div>
-
-        <div class="col-6">
-          <h3>Ocorrência</h3>
+          <h3>Ocorrência<a href="{% url  'app:gerar_pdf_denuncia'  denuncia.id  %}"  role="button" class="btn red btn-danger ms-2" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
+            <i class="fas fa-file-pdf"></i>
+            Gerar pdf
+          </a></h3>
           <br>
           <p><b>Nome(s) da(s) vítimas:</b></p>
           <p>{{denuncia.nomevitimas}}</p>
           <p><b>Data e Hora:</b></p>
           <p>{{denuncia.horario}}</p>
-          <p><b>Direito(s):</b></p>
+          <p><b>Direito(s):</b> <a href="{% url 'app:add_direito' denuncia.id %}" role="button" class="btn btn-info"   data-bs-toggle="tooltip" data-bs-placement="top" title="Visualizar">
+            <i class="fas fa-plus"></i>
+        </a></p>
           {% for direito in denuncia.direito_set.all %}
-              <p><span class="badge badge-pill badge-secondary">{{direito}}</span></p>
+              <p><span class="badge badge-pill bg-secondary">{{direito}}</span></p>
           {% endfor %}
           <p><b>Descrição:</b></p>
           <p>{{denuncia.descricao_situacao}}</p>
@@ -121,12 +55,87 @@
               </datalist>
             </form>
           </div>
-          <h4>Vitimas ja ligadas a essa denuncia:</h4>
+          <h4>Vítimas já ligadas a essa denúncia:</h4>
           {% for ligada in vitimas_ja_ligadas%}
-            <h5><span class="badge bg-secondary">{{ligada}}</span></h5>
+            <h5><a href="{% url 'app:visualizar_vitima' ligada.id %}" class="badge bg-secondary">{{ligada}}</a></h5>
           {% endfor %}
-          
+        </div>
 
+        <div class="col-6">
+          <div class="d-flex">
+            <h3 class="me-2">Comunicante</h3>
+            
+          </div>
+          <br>
+          <i class="fas fa-user fa-4x" >
+          </i>
+          <span id="comunicante_nome">{{denuncia.comunicante.nome}}</span>
+          <br>
+          N° - {{denuncia.comunicante.id}}
+          <br>
+          <br>
+          {% for contato in contatos %}
+            <h5><b>Meios para contato:</b></h5>
+            <div class="row">
+              <div class="col">
+                <p><b>Tipo:</b></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>{{contato.tipo}}</p>
+              </div>
+              <div class="col">
+                <p>{{contato.forma}}</p>
+              </div>
+            </div>
+            
+
+          {% endfor %}
+          <br>
+          <h3>Endereço</h3>
+          {% if denuncia.comunicante.endereco is None %}
+            <p>Comunicante não registrou o endereço</p>
+          {% else %}
+          <br>
+          <p><b>Tipo de logradouro:</b></p>
+          <p>{{denuncia.comunicante.endereco.tipo_de_logradouro}}</p>
+          <p><b>Logradouro:</b></p>
+          <p>{{denuncia.comunicante.endereco.logradouro}}</p>
+          <div class="row">
+            <div class="col">
+              <p><b>Número:</b></p>
+            </div>
+            <div class="col">
+              <p><b>Complemento:</b></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>{{denuncia.comunicante.endereco.numero}}</p>
+            </div>
+            <div class="col">
+              <p>{{denuncia.comunicante.endereco.complemento}}</p>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col">
+              <p><b>Cidade:</b></p>
+            </div>
+            <div class="col">
+              <p><b>Bairro:</b></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>{{denuncia.comunicante.endereco.cidade}}</p>
+            </div>
+            <div class="col">
+              <p>{{denuncia.comunicante.endereco.bairro}}</p>
+            </div>
+          </div>
+          {% endif %}
         </div>
     
     </div>

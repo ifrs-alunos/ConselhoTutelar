@@ -29,7 +29,7 @@ LOGRADOURO_CHOICES= (
 
 TIPODOMEIO_CHOICES = (
 	('Telefone','Telefone'),
-	('Email','Email'),
+	('E-mail','E-mail'),
 	('Rede Social','Rede Social'),
 	('Presencial','Presencial')
 

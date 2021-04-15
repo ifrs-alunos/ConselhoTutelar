@@ -11,9 +11,9 @@
 	
 	<form id="form-comunicante " method="POST" class=" mb-4 "action="{% url 'app:registro_comunicante' %}" novalidate>
 			{% csrf_token %}
-
+			
 				<ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
-						<li class="nav-item">
+						<li class="nav-item ">
 								<a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><h3>Dados do Comunicante</h3></a>
 							</li>
 						<li class="nav-item">
@@ -69,16 +69,16 @@
 														{{field}}
 												</div>
 										{% endfor %}
-										<a class="btn btn-primary btn-lg btnPrevious">
-												<i class="fas fa-arrow-left"></i>
-										</a>
+										
 
-										<a class="btn btn-primary btn-lg float-end btnNext">
+										<button type="button" class="btn btn-primary btn-lg float-end btnNext" onclick="PassButton()">
 												<i class="fas fa-arrow-right"></i>
-										</a>
+										</button>
 						</div>
 						<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<h1>Denúncia</h1>
+
+								
 								{% for field in denuncia %}
 								<div class="form-group">
 										{{field.errors}}
@@ -86,9 +86,9 @@
 										{{ field}}
 								</div>
 								{% endfor %}
-						<a class="btn btn-primary btn-lg btnPrevious">
+						<button type="button" onclick="PreviousButton()" class="btn btn-primary btn-lg btnPrevious">
 								<i class="fas fa-arrow-left"></i>
-						</a>
+						</button>
 						<button type="submit" class="btn btn-primary btn-lg float-end">Enviar</button>
 					</div>
 				</div>
@@ -96,6 +96,13 @@
 	
 </div>
 <script>
+	function PassButton(){
+		document.getElementById("pills-profile-tab").click()
+	}
+	function PreviousButton(){
+		document.getElementById("pills-home-tab").click()
+	}
+
 	function te(valor) {
 		var bairros = document.getElementById("id_bairro");
 		var teste = {{teste}}

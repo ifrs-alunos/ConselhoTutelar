@@ -2,7 +2,7 @@ from app.models.base import *
 
 
 class Cidade(BaseModel):
-    nome_cidade = models.CharField(max_length=100)
+    nome= models.CharField(max_length=100)
 
     @classmethod
     def dicionario_cidade_bairro(cls):
@@ -20,7 +20,7 @@ class Cidade(BaseModel):
         return dicionario_cidade
   
     def __str__(self):
-        return self.nome_cidade
+        return self.nome
     class Meta:
         pass
 

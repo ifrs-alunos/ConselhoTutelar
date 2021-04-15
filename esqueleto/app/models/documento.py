@@ -11,9 +11,9 @@ class Tipo(Enum):
 
 
 class Documento(BaseModel):
-    escolha = models.CharField(choices=Tipo.choices(), max_length=3)
-    valor = models.CharField(max_length=11)
-    comunicante = models.ForeignKey(Comunicante, on_delete=models.PROTECT)
+    escolha = models.CharField(choices=Tipo.choices(), max_length=3,blank=True,null=True)
+    valor = models.CharField(max_length=11,blank=True,null=True)
+    comunicante = models.ForeignKey(Comunicante, on_delete=models.PROTECT,blank=True,null=True)
     def __str__(self):
         return '{} : {}'.format(self.escolha,self.valor)
     class Meta:

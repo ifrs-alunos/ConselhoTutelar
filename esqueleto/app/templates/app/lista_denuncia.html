@@ -10,18 +10,11 @@
   
     <form class="form-group mb-3" method="get" action='{% url 'app:lista_denuncia'  %}'>
       <div class="row">
-        <div class="col-8">
+        <div class="col-11">
           <input class="form-control mr-sm-2" type="search" name ="search" placeholder="Pesquisar" aria-label="Search">
         </div>
-        <div class="col-2">
-          <select class="custom-select form-control mr-sm-2" type="search" name ="filtro" placeholder="Pesquisar" aria-label="Search" >
-            <option selected>Filtro</option>
-            <option value="1">Data</option>
-            <option value="2">Nome</option>
-            <option value="3">Direito</option>
-          </select>
-        </div>
-        <div class="col-2">
+       
+        <div class="col">
           <button class="btn  my-2 my-sm-0" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar"><i class="fas fa-search"></i></button>
 
         </div>
@@ -63,11 +56,45 @@
                       <a href="{% url 'app:visualizar_denuncia' denuncia.id %}" role="button" class="btn btn-info" data-toggle="tooltip" title="Visualizar">
                         <i class="far fa-eye"></i>
                       </a>
+                      <a href="{% url  'app:gerar_pdf_denuncia'  denuncia.id  %}" role="button" class="btn red btn-danger" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
+                        <i class="fas fa-file-pdf"></i>
+                      </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        {% if denuncias %}
+            <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                       {% if denuncias.has_previous %}
+                            <li class="page-item">
+                              <a class="page-link" href="?page={{ denuncias.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                      {% endif %}
+
+
+                        {% for i in denuncias.paginator.page_range %}
+                          {% if denuncias.number == i %}
+                            <li class="page-item"><a class="page-link active" href="?page={{denuncias.number }}">{{  denuncias.number}}</a></li>
+                          {% else %}
+                              <li class="page-item"><a class="page-link active" href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                      {% if denuncias.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ denuncias.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                  </ul>
+            </nav>
+        {% endif %}
         </div>
         <div class="tab-pane fade " id="denunciageral" role="tabpanel" aria-labelledby="profile-tab">
             <table class="table">
@@ -95,11 +122,45 @@
                           <a href="{% url 'app:visualizar_denuncia' denuncia.id %}" role="button" class="btn btn-info" data-toggle="tooltip" title="Visualizar">
                             <i class="far fa-eye"></i>
                           </a>
+                          <a href="{% url  'app:gerar_pdf_denuncia'  denuncia.id  %}" role="button" class="btn red btn-danger" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
+                            <i class="fas fa-file-pdf"></i>
+                          </a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            {% if denuncias_geral %}
+            <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                       {% if denuncias_geral.has_previous %}
+                            <li class="page-item">
+                              <a class="page-link" href="?page={{ denuncias_geral.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                      {% endif %}
+
+
+                        {% for i in denuncias_geral.paginator.page_range %}
+                          {% if denuncias_geral.number == i %}
+                            <li class="page-item"><a class="page-link active" href="?page_geral={{denuncias_geral.number }}">{{  denuncias.number}}</a></li>
+                          {% else %}
+                              <li class="page-item"><a class="page-link active" href="?page_geral={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                      {% if denuncias.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?page_geral={{ denuncias_geral.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                  </ul>
+            </nav>
+        {% endif %}
         </div>
       </div>
 </div>

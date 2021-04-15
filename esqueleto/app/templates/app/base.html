@@ -7,7 +7,6 @@
     
 	<link href="{% static '/css/estilo.css' %}" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
 	{% block css_personalizado %}
 	{% endblock  %}
 
@@ -44,6 +43,18 @@
 					{% endif %}
 					</ul>
 				</li>
+				{% else %}
+					{% if perms.app.add_comunicante %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Denúncia
+							</a>
+							<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+							<li><a class="dropdown-item" href="{% url 'app:registro_comunicante' %}">Registrar</a></li>
+							</ul>
+						</li>
+					{% endif%}
+				
 				{% endif %}
 				{% if perms.app.view_ocorrencia %}
 				<li class="nav-item dropdown">
@@ -71,6 +82,10 @@
 				<li class="nav-item ">
 					<a class="nav-link disabled" href="">Mapa</a>
 				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'app:dados_gerais' acao='geral' %}">Configurações do sistema</a>
+				  </li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					Minha conta
@@ -107,15 +122,16 @@
       <footer class="mt-auto footer py-3">
         <div class="container">
           <div class="row">
-			<div class="col">
-				<p><a>Guilherme Alves da Silva</a>, <a>Gustavo da Silva Corona</a>, <a>Gustavo Oliveira Longo</a> e <a>Wendel Faria de Oliveira</a>.</p>
-			</div>
-			<div class="col">
-				<img  src="{%static 'images/conselho_tutelar.png'%}" class="img-fluid" width="50%"></img>
+			<div class="col text-center">
+				<img  src="{%static 'images/conselho_tutelar.png'%}" height="80px"></img>
 			</div>
 
-			<div class="col ">
-				<img src="{%static 'images/tetes.png'%}" class="img-fluid" width="50%"></img>
+			<div class="col text-center">
+				<p><a>Guilherme Alves da Silva</a>, <a>Gustavo da Silva Corona</a>, <a>Gustavo Oliveira Longo</a> e <a>Wendel Faria de Oliveira</a>.</p>
+			</div>
+			
+			<div class="col text-center">
+				<img src="{%static 'images/tetes.png'%}"  height="70px"></img>
 			</div>
 		  </div>
         </div>
@@ -131,6 +147,8 @@
 
 	
 	{% endblock scripts %}
+	{% block extra_scripts %}
+	{% endblock %}
  
 
 

@@ -6,7 +6,7 @@
 {% endblock navbar %}
 {% block content %}
     <div class="container">
-        <h3>Dados da Vitima</h3>
+        <h3>Dados da Vítima</h3>
         <form id="form-anotacao" method="POST" action="{% url 'app:cadastrar_vitima' %}" >
             {{ form.non_field_errors }}
             {% csrf_token %}

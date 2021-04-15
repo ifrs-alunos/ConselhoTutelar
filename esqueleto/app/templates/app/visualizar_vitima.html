@@ -51,25 +51,30 @@
         <div class="col-sm">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href="{% url 'app:vitima_update' vitima.id  %}"><i class="far fa-edit float-end fa-2x"></i></a>
+					<a href="{% url 'app:vitima_update' vitima.id  %}" role="button" class="btn  float-end btn-info pad" data-toggle="tooltip"  title="Editar">
+                        <i class="far fa-edit float-end   "></i>
+                    </a>
+					<a href="{% url  'app:gerar_pdf_vitima'  vitima.id  %}" role="button" class="btn red btn-danger float-end me-2" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
                     <i class="far fa-user fa-3x"></i> <h2>{{vitima.nome}}</h2>
+				</li>
                 <li class="list-group-item">Nome do responsável: {{vitima.nome_responsavel}}</li>
                 <li class="list-group-item">Data de nascimento: {{vitima.data_nascimento}}</li>
-				<li class="list-group-item"><h3>Endereços</h3>
+				<li class="list-group-item"><h3>Endereço</h3>
 					<div class="accordion accordion-flush" id="accordion">
-						{% for endereco in vitima.enderecos.all reversed %}
 						<div class="accordion-item">
-						  <h2 class="accordion-header background-white" id="heading{{endereco.id}}">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{endereco.id}}" aria-expanded="true" aria-controls="collapse{{endereco.id}}">
-							 {% if forloop.first %} Atual {% else %}{{endereco.id}}{% endif %}
+						  <h2 class="accordion-header background-white" id="heading{{vitima.endereco.id}}">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{vitima.endereco.id}}" aria-expanded="true" aria-controls="collapse{{vitima.endereco.id}}">
+							 Mostrar
 							</button>
 						  </h2>
-						  <div id="collapse{{endereco.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{endereco.id}}" data-bs-parent="#accordionExample">
+						  <div id="collapse{{vitima.endereco.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{vitima.endereco.id}}" data-bs-parent="#accordionExample">
 							<div class="accordion-body">
 								<p><b>Tipo de logradouro:</b></p>
-                                <p>{{endereco.tipo_de_logradouro}}</p>
+                                <p>{{vitima.endereco.tipo_de_logradouro}}</p>
                                 <p><b>Logradouro:</b></p>
-                                <p>{{endereco.logradouro}}</p>
+                                <p>{{vitima.endereco.logradouro}}</p>
                                 <div class="row">
 									<div class="col">
 										<p><b>Número:</b></p>
@@ -80,10 +85,10 @@
 									</div>
 									<div class="row">
 									<div class="col">
-										<p>{{endereco.numero}}</p>
+										<p>{{vitima.endereco.numero}}</p>
 									</div>
 									<div class="col">
-										<p>{{endereco.complemento}}</p>
+										<p>{{vitima.endereco.complemento}}</p>
 									</div>
 									</div>
 									
@@ -97,16 +102,15 @@
 									</div>
 									<div class="row">
 									<div class="col">
-										<p>{{endereco.cidade}}</p>
+										<p>{{vitima.endereco.cidade}}</p>
 									</div>
 									<div class="col">
-										<p>{{endereco.bairro}}</p>
+										<p>{{vitima.endereco.bairro}}</p>
 									</div>
                                 </div>
 							</div>
 						  </div>
 						</div>
-						{% endfor%}
 					  </div>
                 </li>
                 <li class="list-group-item"></li>

@@ -1,0 +1,65 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block titulo_da_pagina %}{{ titulo_pagina }} {% endblock titulo_da_pagina %}
+{% block navbar %}
+
+{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        <table class="table">
+                <thead >
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Servidor</th>
+                        <th scope="col">Modelo mudado</th>
+                        <th scope="col">Campo mudado</th>
+                        <th scope="col">Antes</th>
+                        <th scope="col">Agora</th>
+                        <th scope="col">Data</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    {% for log in logs  %}
+                    <tr>
+                        <th scope="row">{{log.id}}</th>
+                        <td>{{log.servidor}}</td>
+                        <td>{{log.model}}</td>
+                        <td>{{log.atributo_mudado}}</td>
+                        <td>{{log.antes}}</td>
+                        <td>{{log.agora}}</td>
+                        <td>{{log.data}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+        {% if logs %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if logs.has_previous %}
+                            <li class="page-item">
+                            <a class="page-link" href="?page={{ logs.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            </li>
+                    {% endif %}
+                        {% for i in logs.paginator.page_range %}
+                        {% if logs.number == i %}
+                            <li class="page-item"><a class="page-link active" href="?page={{logs.number }}">{{  logs.number}}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link active" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    {% if logs.has_next %}
+                        <li class="page-item">
+                        <a class="page-link" href="?page={{ logs.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+{% endblock content %}

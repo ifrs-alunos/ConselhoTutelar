@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style>
+            .img{
+                width: 200px;
+                
+            }
+            .center{
+                margin-left: 250px;
+            }
+            
+            
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <img   class="img" src="C:\Users\GAMER\Documents\GitHub\ConselhoTutelar\esqueleto\app\templates\pdf\conselho_tutelar.png"></img>
+        </div>
+        <div class="box">
+            <div>
+                <h1>Dados da Denuncia</h1>
+                <h3>Comunicante</h3>
+                <h2>{{denuncia.comunicante.nome}}</h2>
+                <h3>N° - {{denuncia.id}}</h3>
+                {% for contato in contatos %}
+                <h5><b>Meios para contato:</b></h5>
+                    <p><b>Tipo:</b></p>
+                    <p>{{contato.tipo}}</p>
+                    <br>
+                    <p><b>Dígitos:</b></p>
+                    <p>{{contato.forma}}</p>              
+                {% endfor %}
+                <h3>Endereço</h3>
+                {% if denuncia.comunicante.endereco is None %}
+                <p>Comunicante não registrou o endereço</p>
+                {% else %}
+                <p><b>Tipo de logradouro:</b></p>
+                <p>{{denuncia.comunicante.endereco.tipo_de_logradouro}}</p>
+                <p><b>Logradouro:</b></p>
+                <p>{{denuncia.comunicante.endereco.logradouro}}</p>
+                <p><b>Número:</b></p>
+                <p>{{denuncia.comunicante.endereco.numero}}</p>
+                <p><b>Complemento:</b></p>            
+                <p>{{denuncia.comunicante.endereco.complemento}}</p>
+                <p><b>Cidade:</b></p>
+                <p>{{denuncia.comunicante.endereco.cidade}}</p>
+                <p><b>Bairro:</b></p>
+                <p>{{denuncia.comunicante.endereco.bairro}}</p>
+                {% endif %}
+            </div>
+            <div>
+                <h3>Ocorrência</h3>
+                <br>
+                <p><b>Nome(s) da(s) vítimas:</b></p>
+                <p>{{denuncia.nomevitimas}}</p>
+                <p><b>Data e Hora:</b></p>
+                <p>{{denuncia.horario}}</p>
+                <p><b>Direito(s):</b></p>
+                {% for direito in denuncia.direito_set.all %}
+                    <p><span >{{direito}}</span></p>
+                {% endfor %}
+                <p><b>Descrição:</b></p>
+                <p>{{denuncia.descricao_situacao}}</p>
+                <br>
+                <h4>Vítimas já ligadas a essa denúncia:</h4>
+                {% for ligada in vitimas_ja_ligadas%}
+                <h5><span >{{ligada}}</span></h5>
+                    {% endfor %}
+            </div>  
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style>
+            .img{
+                width: 200px;
+                
+            }
+            .center{
+                margin-left: 250px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <img   class="img" src="C:\Users\GAMER\Documents\GitHub\ConselhoTutelar\esqueleto\app\templates\pdf\conselho_tutelar.png"></img>
+        </div>
+            <h1>Dados da Ocorrencia</h1>
+                Ocorrencia Nº {{ocorrencia.id}} Referente a Denuncia Nº {{ocorrencia.denuncia.id}}
+    
+                    <p>Data: {{ocorrencia.denuncia.horario | date:"d/m/y"}}</p>
+                    <p>Conselheiro Responsável: {{ocorrencia.denuncia.conselheiro}}</p>
+                    Direitos:
+                    {% for direito in ocorrencia.denuncia.direito_set.all %}
+                        {{direito}}
+                    {% endfor %}
+                    <p>Comunicante: {{ocorrencia.denuncia.comunicante}}</p>
+                    <h4>Vitimas</h4>
+                    {% for tutelado in tutelados %}
+                        {{tutelado.nome}}
+                        {%if not forloop.last %}
+                        ,
+                        {% endif%}
+                    {% endfor %}
+            <h1>Anotações</h1>
+            {% for anotacao in anotacoes  reversed %}            
+                <h2 >{{anotacao.data | date:"d/m/y H:i"}} - {{ anotacao.titulo}}</h2>
+                <p class="card-text">{{ anotacao.descricao}}.</p>
+                <br>
+            {% endfor%}
+            <h1 class="separate">Arquivos Relacionados</h1>
+            {% for image in images %}    
+                <img src="{{image.upload.path}}" alt="{{image.titulo}}">
+                <h5>{{image.titulo}}</h5>        
+                <br>
+            {% endfor%}
+        
+    </body>
+</html>

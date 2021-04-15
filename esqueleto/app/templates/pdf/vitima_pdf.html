@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style>
+            .img{
+                width: 200px;
+                
+            }
+            .center{
+                margin-left: 250px;
+            }
+            .bar{
+                border-bottom: 1px solid gray;
+            }
+            
+            
+            
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <img   class="img" src="C:\Users\GAMER\Documents\GitHub\ConselhoTutelar\esqueleto\app\templates\pdf\conselho_tutelar.png"></img>
+        </div>
+        <h1>Dados da Vitima</h1>
+        <h2>{{vitima.nome}}</h2>
+        <h2>Nome do responsável: {{vitima.nome_responsavel}}</h2>
+        <h2>Data de nascimento: {{vitima.data_nascimento}}</h2>
+        <h2>Endereço</h2>
+        <p><b>Tipo de logradouro:</b> {{vitima.endereco.tipo_de_logradouro}}</p>
+        <p><b>Logradouro:</b> {{vitima.endereco.logradouro}}</p>
+        <p><b>Número:</b>{{vitima.endereco.numero}}</p>
+        <p><b>Complemento:</b>{{vitima.endereco.complemento}}</p>
+        <p><b>Cidade:</b>{{vitima.endereco.cidade}}</p>
+        <p><b>Bairro:</b>{{vitima.endereco.bairro}}</p>
+        <br>
+        <h1>Ocorrências</h1>
+        {% for ocorrencia in ocorrencias %}
+                <div class="bar">.</div>
+                <h2>Ocorrência N° {{ocorrencia.id}}</h2>
+                <h2>Data: {{ocorrencia.denuncia.horario | date:"d/m/y"}}</h2>
+                <h2>Conselheiro: {{ocorrencia.denuncia.conselheiro}}</h2>
+                <h2>Direitos:
+                    {% for direito in ocorrencia.denuncia.direito_set.all %}
+                        {{direito}} 
+                    {% endfor %}
+                </h2>
+                <div class="bar">.</div>
+        {% endfor %}
+    </body>
+</html>

@@ -2,9 +2,9 @@ from app.models.base import *
 from app.models.endereco import *
 
 class Escola(BaseModel):
-    nome_escola = models.CharField(max_length=100)
-    endereco = models.ForeignKey(Endereco, on_delete=models.PROTECT)
+    nome = models.CharField(max_length=100)
+    endereco = models.ForeignKey(Endereco, on_delete=models.PROTECT,null=True)
     def __str__(self):
-        return self.nome_escola
+        return self.nome
     class Meta:
         pass

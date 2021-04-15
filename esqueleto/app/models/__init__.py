@@ -1,4 +1,7 @@
+from .log import *
+
 from .base import *
+
 from django.contrib.auth.models import User 
 
 from .bairro import *

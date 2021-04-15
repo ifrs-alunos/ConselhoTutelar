@@ -1,5 +1,6 @@
 .navbar {
     background-color: #162649;
+    padding: 10%;
 }
 
 #nome-titulo{
@@ -39,3 +40,8 @@ main > .container {
 main > .alert {
     padding-top: 80px;
   }
+
+.form-group{
+    margin-bottom: 15px;
+}
+

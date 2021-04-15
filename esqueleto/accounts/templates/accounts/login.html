@@ -1,0 +1,41 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!-- {% block titulo_da_pagina %}{{ titulo_pagina }} {% endblock titulo_da_pagina %} -->
+{% block navbar %}
+
+{% endblock navbar %}
+
+{% block content %}
+<div class="container d-flex justify-content-center">
+    <div class=" " >
+        <h2>Login</h2>
+        <form id="form-login"  class="" method="POST" action="">
+            {% csrf_token %}
+                {% for field in form %}
+                    <div class="my-2">
+                        <span class="fw-bold">{{ field.label_tag }}</span>
+                        {{ field|add_class:'form-control'}}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                {% if form.non_field_errors %}
+                    <div class="text-danger pt-3">
+                        {% for non_field_error in form.non_field_errors %}
+                            {{ non_field_error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="mt-4 px-1 row">
+                    <div class="ps-2  pb-3">
+                        <button type="submit" class="w-100 btn btn-primary">Entrar</button>
+                    </div>
+                </div>
+                <div class="ps-2 row">
+                    <a class="btn btn-danger" href="{% url 'accounts:registro_user'  %}">Ainda não tem conta? Cadastre-se aqui</a>
+                </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
