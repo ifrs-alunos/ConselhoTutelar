@@ -13,6 +13,9 @@ a.link {
 .card-ocorrencia:hover{
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
+.bg-primary{
+    background-color:  #5A6D96 !important;
+}
 .card {
     --bs-gutter-x: 0 !important;
 }
@@ -21,3 +24,4 @@ a.link {
 .pad{
     padding-bottom: 14px;
 }
+

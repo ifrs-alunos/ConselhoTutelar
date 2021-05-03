@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Bairro, Cidade, Comunicante, Denuncia, Direito, Ocorrencia, Contato, Vitima,Anotacao, Servidor, Log, Escola
 from django.contrib import messages
 import datetime
-from .forms import ComunicanteForm, ContatoForm, EnderecoForm, DocumentoForm,DenunciaForm, DireitoForm, AnotacaoForm, VitimaForm, ArquivoForm, VitimaToOcorrenciaForm, CidadeForm,BairroForm,EscolaForm, StatusServidorForm, GrupoForm,DireitoAddForm
+from .forms import ComunicanteForm, ContatoForm, EnderecoForm, DocumentoForm,DenunciaForm, DireitoForm, AnotacaoForm, VitimaForm, ArquivoForm, VitimaToOcorrenciaForm, CidadeForm,BairroForm,EscolaForm, StatusServidorForm, GrupoForm,DireitoAddForm, ContatoFormSet
 from django.contrib.auth.decorators import login_required, permission_required
 from dateutil.relativedelta import relativedelta
 from django.http import HttpResponse
@@ -32,6 +32,7 @@ def registro_comunicante(request):
         comunicante = ComunicanteForm(request.POST)
         documento = DocumentoForm(request.POST)
         denuncia = DenunciaForm(request.POST)
+        formset = ContatoFormSet(request.POST)
         
         teste = Cidade.dicionario_cidade_bairro()
         contexto = {
@@ -43,7 +44,7 @@ def registro_comunicante(request):
             'teste':teste,
         }    
 
-        if comunicante.is_valid() and contato.is_valid() and endereco.is_valid() and documento.is_valid() and denuncia.is_valid():
+        if comunicante.is_valid() and contato.is_valid() and endereco.is_valid() and documento.is_valid() and denuncia.is_valid() and formset.is_valid():
             endereco  = endereco.save()
             comunicante = comunicante.save(commit = False)
             comunicante.endereco = endereco
@@ -53,16 +54,15 @@ def registro_comunicante(request):
             documento = documento.save(commit= False)
             documento.comunicante = comunicante
             documento.save()
-
-            contato= contato.save(commit = False)
-            contato.comunicante = comunicante
-            contato.save()
-
+            for form in formset:
+                form = form.save(commit=False)
+                form.comunicante = comunicante
+                form.save()
             denuncia = denuncia.save(commit = False)
             denuncia.comunicante = comunicante
             denuncia.conselheiro = Servidor.objects.get(id=Servidor.conselheiro_para_denuncia())
             denuncia.save()
-            messages.success(request,'')
+            messages.success(request,'Registro de Denuncia foi feito com sucesso')
             return redirect('app:secretaria')
         else:
             return render(request,'app/registro-comunicante.html',contexto)
@@ -73,6 +73,7 @@ def registro_comunicante(request):
         endereco = EnderecoForm()
         documento = DocumentoForm()
         denuncia = DenunciaForm()
+        formset = ContatoFormSet()
         
     
     teste = Cidade.dicionario_cidade_bairro()
@@ -85,6 +86,7 @@ def registro_comunicante(request):
         'documento':documento,
         'denuncia':denuncia,
         'teste':teste,
+        'formset':formset
     }
     
     return render(request,'app/registro-comunicante.html',contexto)
@@ -307,11 +309,11 @@ def lista_ocorrencia(request):
         ocorrencias = Ocorrencia.objects.all().filter(denuncia__conselheiro=request.user.servidor)
         ocorrencias_geral = Ocorrencia.objects.all()
     
-    paginator_ocorrencia = Paginator(ocorrencias, 12)
+    paginator_ocorrencia = Paginator(ocorrencias.order_by('-denuncia__horario'), 12)
     page_number = request.GET.get('page')
     page_obj = paginator_ocorrencia.get_page(page_number)
 
-    paginator_geral = Paginator(ocorrencias_geral, 12)
+    paginator_geral = Paginator(ocorrencias_geral.order_by('-denuncia__horario'), 12)
     page_number_geral = request.GET.get('page_geral')
     page_obj_geral = paginator_geral.get_page(page_number_geral)
     contexto = {
@@ -363,6 +365,7 @@ def gerar_pdf_vitima(request, vitima_id):
     return HttpResponse(pdf, content_type='application/pdf')
 
 @login_required
+@permission_required('app.view_cidade',raise_exception=True)
 def dados_gerais(request,acao):
     if acao =='geral':
         queryset=''
@@ -399,6 +402,7 @@ def dados_gerais(request,acao):
 
 
 @login_required
+@permission_required('app.change_cidade',raise_exception=True)
 def dado_update(request,objeto,objeto_id):
     if request.method == 'POST':
             if objeto == 'cidade':
@@ -489,6 +493,7 @@ def dado_update(request,objeto,objeto_id):
     return render(request,'app/dado_update.html',contexto)
 
 @login_required
+@permission_required('app.add_cidade',raise_exception=True)
 def dado_add(request,objeto):
     if request.method == 'POST':
             if objeto == 'cidade':

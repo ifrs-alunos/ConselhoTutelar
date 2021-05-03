@@ -2,7 +2,6 @@
 {% load static %}
 {% block titulo_da_pagina %}{{ titulo_pagina }} {% endblock titulo_da_pagina %}
 {% block css_personalizado %}
-<link href="{% static '/css/ocorrencia.css' %}" rel="stylesheet">
 
 
 {% endblock  %}
@@ -14,57 +13,76 @@
 <div class="container">
     <h1 class="mb-4">Configurações do sistema</h1>
     <div class="row">
+      
         <div class="col-3">
-            <ul class="nav navbar navbar-light flex-column" style="background-color: #e3f2fd;">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="cidadeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                   Cidade
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="cidadeDropdown">
-                  <li><a class="dropdown-item" href="{% url  'app:dados_gerais'  acao='cidade'  %}">Listar</a></li>
-                  <li><a class="dropdown-item" href="{% url  'app:dado_add'  objeto='cidade'  %}">Adicionar</a></li>
-                </ul>
-              </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="bairroDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Bairro
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="bairroDropdown">
-                    <li><a class="dropdown-item" href="{% url  'app:dados_gerais'  acao='bairro'  %}">Listar</a></li>
-                    <li><a class="dropdown-item" href="{% url  'app:dado_add'  objeto='bairro'  %}">Adicionar</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="direitoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Direito
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="direitoDropdown">
-                    <li><a class="dropdown-item" href="{% url  'app:dados_gerais'  acao='direito'  %}">Listar</a></li>
-                    <li><a class="dropdown-item" href="{% url  'app:dado_add'  objeto='direito'  %}">Adicionar</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="escolaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Escola
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="escolaDropdown">
-                      <li><a class="dropdown-item" href="{% url  'app:dados_gerais'  acao='escola'  %}">Listar</a></li>
-                      <li><a class="dropdown-item" href="{% url  'app:dado_add'  objeto='escola'  %}">Adicionar</a></li>
-                    </ul>
-                </li>
-                {% if perms.app.view_servidor %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="servidoresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Servidores
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="servidoresDropdown">
-                    <li><a class="dropdown-item" href="{% url  'app:dados_gerais'  acao='servidor'  %}">Listar</a></li>
-                  </ul>
-                </li>
-                {%  endif %}
-              </ul>
-              
-            
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <li><a href="{% url  'app:dados_gerais'  acao='cidade'  %}" class="link-dark rounded">Listar</a></li>
+                  <li><a href="{% url  'app:dado_add'  objeto='cidade'  %}" class="link-dark rounded">Adicionar</a></li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  Bairro
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <li><a href="{% url  'app:dados_gerais'  acao='bairro'  %}" class="link-dark rounded">Listar</a></li>
+                  <li><a href="{% url  'app:dado_add'  objeto='bairro'  %}" class="link-dark rounded">Adicionar</a></li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Direito
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <li><a href="{% url  'app:dados_gerais'  acao='direito'  %}" class="link-dark rounded">Listar</a></li>
+                  <li><a href="{% url  'app:dado_add'  objeto='direito'  %}" class="link-dark rounded">Adicionar</a></li>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                  Escola
+                </button>
+              </h2>
+              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <li><a href="{% url  'app:dados_gerais'  acao='escola'  %}" class="link-dark rounded">Listar</a></li>
+                  <li><a href="{% url  'app:dado_add'  objeto='escola'  %}" class="link-dark rounded">Adicionar</a></li>
+                </div>
+              </div>
+            </div>
+            {% if perms.app.view_servidor %}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                  Servidor
+                </button>
+              </h2>
+              <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <li><a href="{% url  'app:dados_gerais'  acao='servidor'  %}" class="link-dark rounded">Listar</a></li>
+                </div>
+              </div>
+            </div>
+            {%  endif %}
+          </div>
             </div>
         <div class="col">
           {% if queryset != '' %}

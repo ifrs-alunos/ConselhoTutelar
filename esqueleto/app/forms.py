@@ -5,6 +5,8 @@ from .models.choices import TIPODOMEIO_CHOICES,LOGRADOURO_CHOICES
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import Group
+from django.forms import formset_factory
+
 
 class ComunicanteForm(forms.ModelForm):
     
@@ -22,7 +24,7 @@ class ContatoForm(forms.ModelForm):
         model = models.Contato
         fields = ('tipo','forma')
         widgets = {
-            'tipo': forms.Select(attrs={"class": "form-control"},choices=TIPODOMEIO_CHOICES),
+            'tipo': forms.Select(attrs={"class": "form-select"},choices=TIPODOMEIO_CHOICES),
             'forma': forms.TextInput(attrs={"class": "form-control mb-2"})
         }
     
@@ -49,7 +51,7 @@ class DocumentoForm(forms.ModelForm):
         model = models.Documento 
         fields = ('escolha','valor',)
         widgets = {
-            'escolha': forms.Select(attrs={"class": "form-control"},choices=Tipo.choices()),
+            'escolha': forms.Select(attrs={"class": "form-select"},choices=Tipo.choices()),
             'valor': forms.NumberInput(attrs={"class": "form-control"}),
 
             
@@ -227,3 +229,5 @@ class DireitoAddForm(forms.Form):
         super(DireitoAddForm, self).__init__(*args, **kwargs)
         for new_field in self.visible_fields():
             new_field.field.widget.attrs['class'] = 'form-control'
+
+ContatoFormSet = formset_factory(ContatoForm, extra=0)

@@ -38,17 +38,18 @@
 						</div>
 								<!-- <button type="addMeiodeContato" class="btn btn-primary">Adicionar Meio de Contato</button> -->
 								<div class="form-row">
-								{% for field in contato %}
-										<div class="form-group col">
-												{{field.errors}}
-												{{field.label_tag}}
-												{{field}}
-										</div>
-								{% endfor %}
+									<h3>Contato <button type="button" id="generate_forms"  class="btn btn-primary "><i class="fas fa-plus"></i></button></h3>
+									<div class="row g-3" id="contato_form">
+										{{ formset.management_form }}
+										<div id="forms"></div>
+					
+								</div>
+								<hr/>
+								
 								</div>
 								{{ documento.non_field_errors }}
 							<div class="form-row">
-								
+								<h3>Documento</h3>
 									<div class="form-group col">
 											<label for="escolha">Tipo de Documento</label>
 											{{documento.escolha}}
@@ -93,7 +94,22 @@
 					</div>
 				</div>
 	</form>
-	
+	<div style="display:none;" id="form_template">
+		<div class="form-number mt-1 mb-3" numero="number">
+			<h5>#number</h5>
+				<div class="row ">
+					{% for field in formset.empty_form%}
+						<div class="col">
+				 			{{field}}
+						</div>
+					{% endfor %}
+					<div class="col-1">
+				 		<button type="button" onclick="del_form(this)"  class="btn btn-primary "><i class="fas fa-times"></i></button>
+					</div>
+				</div>
+		</div>
+	 </div>
+	 
 </div>
 <script>
 	function PassButton(){
@@ -138,5 +154,40 @@
 		te(Value.value)
 	}
 </script>
+
+<script>
+	let qf = -1;
+	$(function() {
+		$("#generate_forms").click(function() {
+			qf++
+			let quantity = qf;
+			$("[name=form-TOTAL_FORMS]").val(quantity+1);
+			let formChildren = $("#forms").children()
+			let beforeFormNumber
+			if (formChildren.length !=0){
+				let beforeForm = $("#forms").children().last()
+				beforeFormNumber = parseInt(beforeForm.attr('numero'))+1
+			}
+			else{
+				beforeFormNumber =quantity
+			}
+			html = $("#form_template").clone().html().replace(/__prefix__/g, beforeFormNumber).replace(/number/g,beforeFormNumber);
+
+			$("#forms").append(html);
+		})
+	})
+	function del_form(button) {
+
+		 let parent = $(button).parents();
+		 let quantity = qf+1
+		 if ($("[name=form-TOTAL_FORMS]").val())
+		 $("[name=form-TOTAL_FORMS]").val(quantity-1);
+		 $(parent[2]).remove()
+		 qf--
+	}
+
+
+</script>
+
 
 {% endblock content %}

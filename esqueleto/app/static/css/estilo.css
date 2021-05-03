@@ -5,15 +5,18 @@
 
 #nome-titulo{
     margin-left: 10px;
+    color: #fff !important;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #162649;
+    background-color: #162649 !important;
 }
 
 .footer {
     background-color: #162649;
-    color: white;
+    color: white !important;
   }
+
+
 
 main > .container {
     padding-top: 80px;
@@ -45,3 +48,16 @@ main > .alert {
     margin-bottom: 15px;
 }
 
+.btn-nav{
+    background-color: transparent !important; 
+    color: #212529 !important;
+    border: 1px solid transparent !important;
+}
+
+a:not(.nav-link):not(.btn):not(.dropdown-item):not(.badge ){
+    color: #5A6D96 !important;
+  }
+
+.bg-secondary{
+    background-color: #5A6D96 !important;
+  }

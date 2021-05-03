@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="container d-flex justify-content-center">
-    <div class=" " >
+    <div class=" row" >
         <h2>Login</h2>
         <form id="form-login"  class="" method="POST" action="">
             {% csrf_token %}
@@ -20,22 +20,26 @@
                         {{ field.errors }}
                     </div>
                 {% endfor %}
-                {% if form.non_field_errors %}
-                    <div class="text-danger pt-3">
+                
+                
+                <div class="mt-4 ps-2 row">
+                    <button type="submit" class="w-100 btn btn-primary">Entrar</button>
+                </div>
+               
+                <div class="ps-2 mt-4 row">
+                    <a class="btn " href="{% url 'accounts:registro_user'  %}">Cadastre-se </a>
+                </div>
+        </form>
+        
+    </div>
+    
+</div>
+{% if form.non_field_errors %}
+                    
+                    <div class="text-danger  text-center pt-3">
                         {% for non_field_error in form.non_field_errors %}
                             {{ non_field_error }}
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class="mt-4 px-1 row">
-                    <div class="ps-2  pb-3">
-                        <button type="submit" class="w-100 btn btn-primary">Entrar</button>
-                    </div>
-                </div>
-                <div class="ps-2 row">
-                    <a class="btn btn-danger" href="{% url 'accounts:registro_user'  %}">Ainda não tem conta? Cadastre-se aqui</a>
-                </div>
-        </form>
-    </div>
-</div>
 {% endblock content %}

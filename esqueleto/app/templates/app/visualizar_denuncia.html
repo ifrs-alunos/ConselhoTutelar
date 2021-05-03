@@ -14,7 +14,7 @@
     <br>
     <div class="row">
         <div class="col-6">
-          <h3>Ocorrência<a href="{% url  'app:gerar_pdf_denuncia'  denuncia.id  %}"  role="button" class="btn red btn-danger ms-2" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
+          <h3>Denúncia<a href="{% url  'app:gerar_pdf_denuncia'  denuncia.id  %}"  role="button" class="btn red btn-danger ms-2" data-toggle="tooltip" target="_blank" title="Gerar Pdf">
             <i class="fas fa-file-pdf"></i>
             Gerar pdf
           </a></h3>
@@ -74,8 +74,8 @@
           N° - {{denuncia.comunicante.id}}
           <br>
           <br>
+          <h5><b>Meios para contato:</b></h5>
           {% for contato in contatos %}
-            <h5><b>Meios para contato:</b></h5>
             <div class="row">
               <div class="col">
                 <p><b>Tipo:</b></p>
