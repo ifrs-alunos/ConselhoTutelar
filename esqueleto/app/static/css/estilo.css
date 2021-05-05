@@ -24,7 +24,7 @@ main > .container {
 
 .maioridade {
     background-color:#5A6D96  !important;
-    color: white;
+    color: white !important;
 }
 
 .btn {
