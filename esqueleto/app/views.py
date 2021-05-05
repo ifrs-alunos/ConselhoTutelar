@@ -33,7 +33,7 @@ def registro_comunicante(request):
         documento = DocumentoForm(request.POST)
         denuncia = DenunciaForm(request.POST)
         formset = ContatoFormSet(request.POST)
-        
+        print(formset)
         teste = Cidade.dicionario_cidade_bairro()
         contexto = {
             'contato':contato,
@@ -45,11 +45,13 @@ def registro_comunicante(request):
         }    
 
         if comunicante.is_valid() and contato.is_valid() and endereco.is_valid() and documento.is_valid() and denuncia.is_valid() and formset.is_valid():
-            endereco  = endereco.save()
-            comunicante = comunicante.save(commit = False)
-            comunicante.endereco = endereco
-            comunicante.save()
-
+            if not request.POST['nome']:
+                comunicante = Comunicante.objects.get(nome='ANONIMO')
+            else:
+                endereco  = endereco.save()
+                comunicante = comunicante.save(commit = False)
+                comunicante.endereco = endereco
+                comunicante.save()
 
             documento = documento.save(commit= False)
             documento.comunicante = comunicante

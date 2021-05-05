@@ -67,7 +67,7 @@ class DenunciaForm(forms.ModelForm):
             'nomevitimas': forms.Textarea(attrs={"class": "form-control  mb-2"}),
         }
         labels = {
-            'nomevitimas': 'Nome(s) da(s) possívei(s) vítima(s)',
+            'nomevitimas': 'Nome(s) da(s) possível(eis) vítima(s)',
             'descricao_situacao':'Descrição da situação'
 
         }

@@ -30,7 +30,7 @@
                             <p class="card-text">{{ anotacao.descricao}}.</p>
                                {% if anotacao.arquivo_set.all != '' %}
                                {% for arquivo in anotacao.arquivo_set.all %}
-                               <a href="/iris/media/{{arquivo.upload}}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="{{arquivo.titulo}}"><i class="far fa-file" ></i></a>
+                               <a href="/sol/media/{{arquivo.upload}}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="{{arquivo.titulo}}"><i class="far fa-file" ></i></a>
                                 
                                </i>
                                {% endfor %}
@@ -105,7 +105,7 @@
                     
                   <p class="card-text">
                     {% for arquivo in ocorrencia.arquivo_set.all %}
-                        <a href="/iris/media/{{arquivo.upload}}" target="_blank"><i class="far fa-file"></i>   {{arquivo.titulo}}</a>  <br>
+                        <a href="/sol/media/{{arquivo.upload}}" target="_blank"><i class="far fa-file"></i>   {{arquivo.titulo}}</a>  <br>
 
                     {% endfor %}
                   </p>

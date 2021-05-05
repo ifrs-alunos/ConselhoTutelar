@@ -46,6 +46,7 @@
                 <tr>
                     <th scope="row">{{denuncia.id}}</th>
                     <td>{{denuncia.comunicante}}</td>
+                    
                     <td>{{denuncia.horario}}</td>
                     <td>
                     {% for direito in denuncia.direito_set.all %}
@@ -102,6 +103,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Comunicante</th>
+                        <th scope="col">Conselheiro</th>
                         <th scope="col">Horário</th>
                         <th scope="col">Direitos</th>
                         <th scope="col">Ações</th>
@@ -112,6 +114,7 @@
                     <tr>
                         <th scope="row">{{denuncia.id}}</th>
                         <td>{{denuncia.comunicante}}</td>
+                        <td>{{denuncia.conselheiro}}</td>
                         <td>{{denuncia.horario}}</td>
                         <td>
                         {% for direito in denuncia.direito_set.all %}
