@@ -58,7 +58,7 @@ ROOT_URLCONF = 'esqueleto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,19 +122,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-LOGIN_URL = '/accounts/log'
-LOGIN_REDIRECT_URL = '/sol'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-from django.contrib.messages import constants as messages
+MEDIA_URL = 'media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+LOGIN_URL = '/accounts/log'
+LOGIN_REDIRECT_URL = '/sol'
+
+
+from django.contrib.messages import constants as messages
+
+
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
