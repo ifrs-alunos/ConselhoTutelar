@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_URL = 'sol/accounts/log'
+LOGIN_URL = '/sol/accounts/log'
 LOGIN_REDIRECT_URL = '/sol/sol_app'
 
 
