@@ -129,8 +129,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-LOGIN_URL = '/accounts/log'
-LOGIN_REDIRECT_URL = '/sol'
+
+LOGIN_URL = 'accounts/log'
+LOGIN_REDIRECT_URL = '/sol/sol_app'
 
 
 from django.contrib.messages import constants as messages
